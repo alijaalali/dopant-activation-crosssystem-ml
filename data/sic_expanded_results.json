@@ -1,0 +1,280 @@
+{
+  "dataset_summary": {
+    "SiC": {
+      "n_total_rows": 27,
+      "n_usable": 17,
+      "n_sources": 10
+    },
+    "GaN": {
+      "n_total_rows": 15,
+      "n_usable": 9,
+      "n_sources": 10
+    },
+    "Diamond": {
+      "n_total_rows": 9,
+      "n_usable": 4,
+      "n_sources": 8
+    }
+  },
+  "sic_multivariate_expanded": {
+    "n": 15,
+    "n_sources": 4,
+    "sources": [
+      "S1_S2",
+      "S3",
+      "Saks2004",
+      "Weisse2019_AIPAdv"
+    ],
+    "r2": 0.5517184530297441,
+    "coef_anneal_T_std": 5.132094882163665,
+    "coef_implant_T_std": 28.464959960545773,
+    "cluster_ci_anneal_T": [
+      -42.05882261455047,
+      15.080227893939906
+    ],
+    "cluster_ci_implant_T": [
+      0.08212887649646206,
+      43.20145039523725
+    ],
+    "anneal_T_excludes_zero": false,
+    "implant_T_excludes_zero": true,
+    "n_valid_boot": 4673
+  },
+  "dose_covariate_check": {
+    "n_with_numeric_dose": 10,
+    "sources": [
+      "S3",
+      "Saks2004"
+    ],
+    "note": "Dose is numeric only for part of the SiC rows; most sources report target concentration (cm-3), which is not convertible to dose without implant depth. Dose is therefore not used as a covariate."
+  },
+  "robustness_panel_expanded": {
+    "n_models": 17,
+    "n_models_ok": 17,
+    "implant_T_positive_sign_count": 16,
+    "implant_T_perm_p_lt_0.1_count": 10,
+    "anneal_T_positive_sign_count": 8,
+    "anneal_T_perm_p_lt_0.1_count": 0,
+    "per_model_detail": {
+      "OLS": {
+        "implant_T": {
+          "effect": 56.92991992109161,
+          "perm_p": 0.01,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": 10.264189764327341,
+          "perm_p": 0.6766666666666666,
+          "n_perm_valid": 300
+        }
+      },
+      "Ridge(a=1)": {
+        "implant_T": {
+          "effect": 51.8834639729392,
+          "perm_p": 0.01,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": 7.184139324719183,
+          "perm_p": 0.7433333333333333,
+          "n_perm_valid": 300
+        }
+      },
+      "Lasso(a=0.5)": {
+        "implant_T": {
+          "effect": 54.865887437913116,
+          "perm_p": 0.01,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": 8.199841252248305,
+          "perm_p": 0.69,
+          "n_perm_valid": 300
+        }
+      },
+      "ElasticNet": {
+        "implant_T": {
+          "effect": 41.51070362950487,
+          "perm_p": 0.006666666666666667,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": 1.4530657780690035,
+          "perm_p": 0.9066666666666666,
+          "n_perm_valid": 300
+        }
+      },
+      "BayesianRidge": {
+        "implant_T": {
+          "effect": 48.2250699868345,
+          "perm_p": 0.01,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": 5.132493871796925,
+          "perm_p": 0.30333333333333334,
+          "n_perm_valid": 300
+        }
+      },
+      "ARDRegression": {
+        "implant_T": {
+          "effect": 48.44941385416861,
+          "perm_p": 0.013333333333333334,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": 0.0017626081331343357,
+          "perm_p": 0.6066666666666667,
+          "n_perm_valid": 300
+        }
+      },
+      "HuberRegressor": {
+        "implant_T": {
+          "effect": 58.06112257951905,
+          "perm_p": 0.023333333333333334,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": 12.434128451657557,
+          "perm_p": 0.7133333333333334,
+          "n_perm_valid": 300
+        }
+      },
+      "PLSRegression(1comp)": {
+        "implant_T": {
+          "effect": 38.677506092067574,
+          "perm_p": 0.04666666666666667,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": -14.290274464988912,
+          "perm_p": 0.42,
+          "n_perm_valid": 300
+        }
+      },
+      "DecisionTree(d=2)": {
+        "implant_T": {
+          "effect": 61.67619047619047,
+          "perm_p": 0.06,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": -18.732142857142858,
+          "perm_p": 0.5666666666666667,
+          "n_perm_valid": 300
+        }
+      },
+      "DecisionTree(d=3)": {
+        "implant_T": {
+          "effect": 42.833333333333336,
+          "perm_p": 0.24666666666666667,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": -16.75,
+          "perm_p": 0.7333333333333333,
+          "n_perm_valid": 300
+        }
+      },
+      "RandomForest(n=50,d=3)": {
+        "implant_T": {
+          "effect": 50.15206190476191,
+          "perm_p": 0.09333333333333334,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": -9.901576190476188,
+          "perm_p": 0.7166666666666667,
+          "n_perm_valid": 300
+        }
+      },
+      "ExtraTrees(n=50,d=3)": {
+        "implant_T": {
+          "effect": 34.60405000000001,
+          "perm_p": 0.10333333333333333,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": 1.2758293650793675,
+          "perm_p": 0.9533333333333334,
+          "n_perm_valid": 300
+        }
+      },
+      "AdaBoost(n=30)": {
+        "implant_T": {
+          "effect": 34.0,
+          "perm_p": 0.4666666666666667,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": -12.520000000000001,
+          "perm_p": 0.7466666666666667,
+          "n_perm_valid": 300
+        }
+      },
+      "KNN(k=3)": {
+        "implant_T": {
+          "effect": 41.666666666666664,
+          "perm_p": 0.19333333333333333,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": -5.566666666666666,
+          "perm_p": 0.8566666666666667,
+          "n_perm_valid": 300
+        }
+      },
+      "KNN(k=5)": {
+        "implant_T": {
+          "effect": 24.999999999999993,
+          "perm_p": 0.19333333333333333,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": -4.34,
+          "perm_p": 0.8566666666666667,
+          "n_perm_valid": 300
+        }
+      },
+      "GaussianProcess": {
+        "implant_T": {
+          "effect": 0.0,
+          "perm_p": 1.0,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": 0.0,
+          "perm_p": 1.0,
+          "n_perm_valid": 300
+        }
+      },
+      "SVR(rbf)": {
+        "implant_T": {
+          "effect": 1.71664624225307,
+          "perm_p": 0.37,
+          "n_perm_valid": 300
+        },
+        "anneal_T": {
+          "effect": -0.5087543761895077,
+          "perm_p": 0.8166666666666667,
+          "n_perm_valid": 300
+        }
+      }
+    }
+  },
+  "diamond_descriptive": {
+    "n_total_rows": 9,
+    "n_fitted_eligible": 4,
+    "sources": [
+      "Fontaine1996_APL",
+      "Imamura2025_JAP",
+      "Seki2019_APL",
+      "Seki2021_JAP",
+      "Seki2023_pssa",
+      "Tsubouchi2008_JJAP",
+      "Ueda2008_DRM",
+      "Vogel2004_DRM"
+    ],
+    "note": "Only two diamond rows have both activation% and anneal-T; no model is fitted."
+  }
+}

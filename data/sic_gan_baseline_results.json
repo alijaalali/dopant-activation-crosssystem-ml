@@ -1,0 +1,142 @@
+{
+  "n_total_usable": {
+    "SiC": 17,
+    "GaN": 9
+  },
+  "sic_multivariate_n": 15,
+  "sic_multivariate_sources": [
+    "S1_S2",
+    "S3",
+    "Saks2004",
+    "Weisse2019_AIPAdv"
+  ],
+  "sic_excluded_sources_no_implantT": [
+    "Nipoti2011",
+    "Nipoti2013_JMR"
+  ],
+  "implant_T_filled_rows": 3,
+  "sic_multivariate_model": {
+    "n": 15,
+    "r2_insample": 0.5517184530297441,
+    "coef_intercept": 46.286666666666676,
+    "coef_anneal_T_std": 5.31222288818746,
+    "coef_implant_T_std": 29.464032775247635,
+    "ci_intercept": [
+      31.634516641609743,
+      59.345060645897696
+    ],
+    "ci_anneal_T_std": [
+      -17.198095516300956,
+      19.44583279576327
+    ],
+    "ci_implant_T_std": [
+      12.172311059883398,
+      46.26159268621716
+    ],
+    "X_mean": [
+      1713.3333333333333,
+      641.6666666666666
+    ],
+    "X_std": [
+      72.49794742578842,
+      269.20296821401894
+    ]
+  },
+  "loso_cv": {
+    "multivariate_4fold": {
+      "n_sources": 4,
+      "mae": 31.60433490228963,
+      "rmse": 37.00618033726156,
+      "pred_vs_actual_r": 0.3284928756328059
+    },
+    "univariate_5fold_anneal_only": {
+      "n_sources": 5,
+      "n_rows": 17,
+      "mae": 34.14854072084705
+    }
+  },
+  "gan_contrast": {
+    "n_fitted": 9,
+    "rows": [
+      {
+        "source_id": "G2_Hirukawa",
+        "anneal_num": 1300.0,
+        "activation_pct": 23.0
+      },
+      {
+        "source_id": "G2_Hirukawa",
+        "anneal_num": 1480.0,
+        "activation_pct": 100.0
+      },
+      {
+        "source_id": "Sumida2025_Ccap",
+        "anneal_num": 1300.0,
+        "activation_pct": 100.0
+      },
+      {
+        "source_id": "Breckenridge2021",
+        "anneal_num": 1300.0,
+        "activation_pct": 46.4
+      },
+      {
+        "source_id": "Breckenridge2021",
+        "anneal_num": 1400.0,
+        "activation_pct": 100.0
+      },
+      {
+        "source_id": "Breckenridge2021",
+        "anneal_num": 1200.0,
+        "activation_pct": 85.7
+      },
+      {
+        "source_id": "Breckenridge2021",
+        "anneal_num": 1300.0,
+        "activation_pct": 71.4
+      },
+      {
+        "source_id": "Sakurai2020_ISPSD",
+        "anneal_num": 1300.0,
+        "activation_pct": 0.0
+      },
+      {
+        "source_id": "Rocco2020_JAP",
+        "anneal_num": 1350.0,
+        "activation_pct": 0.0123
+      }
+    ],
+    "n_qualitative_context_rows": 5,
+    "pooled_raw_r": -0.0621280069894535,
+    "pooled_raw_p": 0.7630309332112322,
+    "pooled_raw_ci": [
+      -0.4279132154627236,
+      0.3039281341122824
+    ],
+    "pooled_norm_r": 0.15305670998383356,
+    "pooled_norm_p": 0.4553826918332717,
+    "pooled_norm_ci": [
+      -0.28446378014189494,
+      0.4954677726490329
+    ]
+  },
+  "hall_factor_gap": {
+    "n_hall_rows": 63,
+    "n_stating_convention": 1,
+    "fraction_stating": 0.015873015873015872,
+    "r_H_naive_assumption": 1.0,
+    "r_H_literature_range": [
+      0.2,
+      0.5
+    ],
+    "overstatement_factor_range": [
+      2.0,
+      5.0
+    ],
+    "note": "Illustrative sensitivity bound from literature r_H values for p-type 4H-SiC; not applied as a per-row correction."
+  },
+  "effect_signs": {
+    "anneal_T": "positive",
+    "implant_T": "positive",
+    "anneal_T_CI_excludes_zero": false,
+    "implant_T_CI_excludes_zero": true
+  }
+}

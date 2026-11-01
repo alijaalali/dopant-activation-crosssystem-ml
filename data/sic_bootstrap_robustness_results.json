@@ -1,0 +1,270 @@
+{
+  "robustness_panel": {
+    "n_models_total": 17,
+    "n_models_run_successfully": 17,
+    "implant_T_positive_sign_count": 17,
+    "implant_T_perm_p_lt_0.1_count": 11,
+    "anneal_T_positive_sign_count": 9,
+    "anneal_T_perm_p_lt_0.1_count": 0,
+    "per_model_detail": {
+      "OLS": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": 10.624445776374927,
+          "perm_p": 0.6833333333333333,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 58.92806555049525,
+          "perm_p": 0.0033333333333333335,
+          "n_perm_valid": 300
+        }
+      },
+      "Ridge(a=1)": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": 7.243887903442911,
+          "perm_p": 0.7433333333333333,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 53.37324148646057,
+          "perm_p": 0.0,
+          "n_perm_valid": 300
+        }
+      },
+      "Lasso(a=0.5)": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": 8.412670255532447,
+          "perm_p": 0.6766666666666666,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 56.716615812144035,
+          "perm_p": 0.0,
+          "n_perm_valid": 300
+        }
+      },
+      "ElasticNet": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": 1.1598607850897196,
+          "perm_p": 0.92,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 42.20822202972523,
+          "perm_p": 0.0033333333333333335,
+          "n_perm_valid": 300
+        }
+      },
+      "BayesianRidge": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": 5.3126348948933355,
+          "perm_p": 0.24666666666666667,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 49.917688008321576,
+          "perm_p": 0.006666666666666667,
+          "n_perm_valid": 300
+        }
+      },
+      "ARDRegression": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": 0.0017592488714370802,
+          "perm_p": 0.6333333333333333,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 50.14987188315474,
+          "perm_p": 0.0,
+          "n_perm_valid": 300
+        }
+      },
+      "HuberRegressor": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": 12.86935440387684,
+          "perm_p": 0.6433333333333333,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 60.09776421326788,
+          "perm_p": 0.016666666666666666,
+          "n_perm_valid": 300
+        }
+      },
+      "PLSRegression(1comp)": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": -14.7918393627575,
+          "perm_p": 0.4266666666666667,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 40.0350223130849,
+          "perm_p": 0.03,
+          "n_perm_valid": 300
+        }
+      },
+      "DecisionTree(d=2)": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": -18.732142857142858,
+          "perm_p": 0.49666666666666665,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 61.67619047619047,
+          "perm_p": 0.043333333333333335,
+          "n_perm_valid": 300
+        }
+      },
+      "DecisionTree(d=3)": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": -16.75,
+          "perm_p": 0.66,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 42.833333333333336,
+          "perm_p": 0.20666666666666667,
+          "n_perm_valid": 300
+        }
+      },
+      "RandomForest(n=50,d=3)": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": -9.901576190476188,
+          "perm_p": 0.7033333333333334,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 50.15206190476191,
+          "perm_p": 0.056666666666666664,
+          "n_perm_valid": 300
+        }
+      },
+      "ExtraTrees(n=50,d=3)": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": 1.2428293650793591,
+          "perm_p": 0.9366666666666666,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 37.14405,
+          "perm_p": 0.05,
+          "n_perm_valid": 300
+        }
+      },
+      "AdaBoost(n=30)": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": -12.08,
+          "perm_p": 0.73,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 34.714285714285715,
+          "perm_p": 0.44666666666666666,
+          "n_perm_valid": 300
+        }
+      },
+      "KNN(k=3)": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": -5.566666666666666,
+          "perm_p": 0.87,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 41.666666666666664,
+          "perm_p": 0.13666666666666666,
+          "n_perm_valid": 300
+        }
+      },
+      "KNN(k=5)": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": -4.34,
+          "perm_p": 0.85,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 24.999999999999993,
+          "perm_p": 0.17666666666666667,
+          "n_perm_valid": 300
+        }
+      },
+      "GaussianProcess": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": 6.44374233279618,
+          "perm_p": 0.4533333333333333,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 19.25916883519676,
+          "perm_p": 0.21333333333333335,
+          "n_perm_valid": 300
+        }
+      },
+      "SVR(rbf)": {
+        "anneal_T": {
+          "effect_at_plus1_minus1SD": -4.363587591087963,
+          "perm_p": 0.8,
+          "n_perm_valid": 300
+        },
+        "implant_T": {
+          "effect_at_plus1_minus1SD": 18.0211756215287,
+          "perm_p": 0.21333333333333335,
+          "n_perm_valid": 300
+        }
+      }
+    }
+  },
+  "cluster_bootstrap": {
+    "n_valid_cluster_resamples": 4672,
+    "point_estimates": {
+      "intercept": 46.286666666666676,
+      "anneal_T_std": 5.31222288818746,
+      "implant_T_std": 29.464032775247635
+    },
+    "cluster_ci": {
+      "intercept": [
+        34.05323217454361,
+        58.57782894736849
+      ],
+      "anneal_T_std": [
+        -43.535017429186,
+        15.609518844962711
+      ],
+      "implant_T_std": [
+        0.08501146364650936,
+        44.71774954708556
+      ]
+    },
+    "anneal_T_excludes_zero_under_cluster_boot": false,
+    "implant_T_excludes_zero_under_cluster_boot": true
+  },
+  "thermal_budget": {
+    "n": 13,
+    "sources": [
+      "S3",
+      "Saks2004",
+      "Weisse2019_AIPAdv"
+    ],
+    "r_raw_anneal_T": -0.344359048217087,
+    "r_thermal_budget": 0.04684340325697301,
+    "r2_model_thermal_budget": 0.6334158533793146,
+    "r2_model_raw_annealT": 0.5761982919635644,
+    "thermal_budget_improves_fit": true,
+    "caveat": "Anneal-time variation is limited to S3 (1/5/30 min); the 8 Saks2004 rows share a 5 min anneal."
+  },
+  "hall_factor_sensitivity_refit": {
+    "illustrative_correction_factor": 3.1622776601683795,
+    "n_rows_corrected": 15,
+    "implant_T_coef_corrected": 9.317345262363451,
+    "implant_T_ci_corrected": [
+      0.02688298523476007,
+      14.140994040575329
+    ],
+    "anneal_T_coef_corrected": 1.679872376515036,
+    "anneal_T_ci_corrected": [
+      -13.766981305135577,
+      4.936163272940284
+    ],
+    "implant_T_excludes_zero": true,
+    "note": "Uniform illustrative correction factor (geometric mean of the 2-5x range); not a per-row correction."
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "sic_multivariate_n": 15,
+  "sic_multivariate_sources": [
+    "S1_S2",
+    "S3",
+    "Saks2004",
+    "Weisse2019_AIPAdv"
+  ],
+  "point_estimate": {
+    "intercept": 46.286666666666655,
+    "anneal_T_std": 5.132094882163672,
+    "implant_T_std": 28.4649599605458
+  },
+  "cluster_bootstrap_ci": {
+    "anneal_T_std": [
+      -42.05882261455048,
+      15.080227893939886
+    ],
+    "implant_T_std": [
+      0.0,
+      43.20145039523723
+    ],
+    "n_valid_resamples": 4927
+  },
+  "anneal_T_excludes_zero": false,
+  "implant_T_excludes_zero": false,
+  "loso_cv": {
+    "n_sources": 4,
+    "mae": 31.604334902289636,
+    "rmse": 37.00618033726157
+  },
+  "robustness_panel": {
+    "n_models": 17,
+    "implant_T_positive_count": 16,
+    "implant_T_sig_count": 11,
+    "anneal_T_positive_count": 8,
+    "anneal_T_sig_count": 0,
+    "per_model": {
+      "OLS": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.0033333333333333335,
+        "anneal_T_sign": 1,
+        "anneal_T_perm_p": 0.6433333333333333
+      },
+      "Ridge(a=1)": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.0033333333333333335,
+        "anneal_T_sign": 1,
+        "anneal_T_perm_p": 0.7033333333333334
+      },
+      "Lasso(a=0.5)": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.0033333333333333335,
+        "anneal_T_sign": 1,
+        "anneal_T_perm_p": 0.6233333333333333
+      },
+      "ElasticNet": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.0033333333333333335,
+        "anneal_T_sign": 1,
+        "anneal_T_perm_p": 0.9
+      },
+      "BayesianRidge": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.0,
+        "anneal_T_sign": 1,
+        "anneal_T_perm_p": 0.26666666666666666
+      },
+      "ARDRegression": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.006666666666666667,
+        "anneal_T_sign": 1,
+        "anneal_T_perm_p": 0.5933333333333334
+      },
+      "HuberRegressor": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.01,
+        "anneal_T_sign": 1,
+        "anneal_T_perm_p": 0.6933333333333334
+      },
+      "PLSRegression(1comp)": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.02666666666666667,
+        "anneal_T_sign": -1,
+        "anneal_T_perm_p": 0.42
+      },
+      "DecisionTree(d=2)": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.03333333333333333,
+        "anneal_T_sign": -1,
+        "anneal_T_perm_p": 0.5533333333333333
+      },
+      "DecisionTree(d=3)": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.16666666666666666,
+        "anneal_T_sign": -1,
+        "anneal_T_perm_p": 0.7266666666666667
+      },
+      "RandomForest(n=50,d=3)": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.09,
+        "anneal_T_sign": -1,
+        "anneal_T_perm_p": 0.7266666666666667
+      },
+      "ExtraTrees(n=50,d=3)": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.043333333333333335,
+        "anneal_T_sign": 1,
+        "anneal_T_perm_p": 0.9466666666666667
+      },
+      "AdaBoost(n=30)": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.39,
+        "anneal_T_sign": -1,
+        "anneal_T_perm_p": 0.72
+      },
+      "KNN(k=3)": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.14,
+        "anneal_T_sign": -1,
+        "anneal_T_perm_p": 0.8566666666666667
+      },
+      "KNN(k=5)": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.14333333333333334,
+        "anneal_T_sign": -1,
+        "anneal_T_perm_p": 0.86
+      },
+      "GaussianProcess": {
+        "implant_T_sign": 0,
+        "implant_T_perm_p": 1.0,
+        "anneal_T_sign": 0,
+        "anneal_T_perm_p": 1.0
+      },
+      "SVR(rbf)": {
+        "implant_T_sign": 1,
+        "implant_T_perm_p": 0.3333333333333333,
+        "anneal_T_sign": -1,
+        "anneal_T_perm_p": 0.7566666666666667
+      }
+    }
+  },
+  "gan_n_usable": 9,
+  "gan_sources": [
+    "Breckenridge2021",
+    "G2_Hirukawa",
+    "Rocco2020_JAP",
+    "Sakurai2020_ISPSD",
+    "Sumida2025_Ccap"
+  ]
+}

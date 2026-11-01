@@ -36,6 +36,8 @@ Run from the repository root, in this order. Each script reads from `data/` and 
 7. `07_method_dependence_audit.py` - difference between two analysis methods applied to the same samples, and the reporting audit of the full-text papers (`data/method_audit_results.json`).
 8. `08_build_explorer.py` - writes `explorer.html`, a static page for browsing and filtering the database.
 
+9. `09_graphical_abstract.py` - draws the graphical abstract from the saved results (`figures/graphical_abstract.png`).
+
 `common.py` and `models.py` hold shared helpers (data loading, exact source-level bootstrap, REML and Gibbs mixed-model fits).
 
 ## Requirements

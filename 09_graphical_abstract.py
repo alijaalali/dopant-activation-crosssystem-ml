@@ -16,8 +16,8 @@ loso = k["leave_one_source_out"]
 names = {"training_mean": "Mean", "linear_mixed": "Linear", "linear_mixed_without_implantT": "Linear\nno impl. T",
          "arrhenius_kinetic_mixed": "Kinetic", "random_forest": "Forest"}
 
-plt.rcParams.update({"font.size": 8.5})
-fig, axes = plt.subplots(1, 3, figsize=(8.6, 3.0), gridspec_kw={"width_ratios": [0.8, 1.1, 1.3]})
+plt.rcParams.update({"font.size": 11})
+fig, axes = plt.subplots(1, 3, figsize=(13, 5), gridspec_kw={"width_ratios": [0.8, 1.1, 1.3]})
 
 ax = axes[0]
 ax.bar([0], [100 * share_source], color="#d95f02", width=0.75, label="Between sources")
@@ -28,7 +28,7 @@ ax.set_xticks([])
 ax.set_ylabel("Share of variance in\nlogit activation (%)")
 ax.text(0, 100 * share_source / 2, f"Between\nsources\n{100 * share_source:.0f}%", ha="center", va="center", color="w", fontweight="bold")
 ax.text(0, 100 * share_source + 100 * (1 - share_source) / 2, f"Within\nsources\n{100 * (1 - share_source):.0f}%", ha="center", va="center")
-ax.set_title("Between-study\nvariation", fontsize=9)
+ax.set_title("Between-study\nvariation", fontsize=12)
 ax.spines[["top", "right"]].set_visible(False)
 
 ax = axes[1]
@@ -42,7 +42,7 @@ ax.set_yticklabels([r[0] for r in rows])
 ax.set_ylim(-0.6, 1.6)
 ax.set_xlim(-20, 70)
 ax.set_xlabel("Implant-temperature effect\n(points per 281 °C, 95% interval)")
-ax.set_title("Effect rests on\none study", fontsize=9)
+ax.set_title("Effect rests on\none study", fontsize=12)
 ax.spines[["top", "right"]].set_visible(False)
 
 ax = axes[2]
@@ -52,13 +52,13 @@ ax.bar(range(len(vals)), vals, color=cols, width=0.65)
 for i, v in enumerate(vals):
     ax.text(i, v + 0.6, f"{v:.0f}", ha="center")
 ax.set_xticks(range(len(vals)))
-ax.set_xticklabels(list(names.values()), fontsize=7.5)
+ax.set_xticklabels(list(names.values()), fontsize=10)
 ax.set_ylabel("Error on held-out sources\n(points of activation)")
 ax.set_ylim(0, 38)
-ax.set_title("No model beats the mean", fontsize=9)
+ax.set_title("No model beats the mean", fontsize=12)
 ax.spines[["top", "right"]].set_visible(False)
 
 plt.tight_layout()
-plt.savefig(FIG / "graphical_abstract.png", dpi=200)
+plt.savefig(FIG / "graphical_abstract.png", dpi=150)
 plt.savefig(FIG / "graphical_abstract.pdf")
 print("saved")

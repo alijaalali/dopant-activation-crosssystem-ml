@@ -1,0 +1,210 @@
+{
+  "pooled_n": {
+    "SiC": 17,
+    "GaN": 9
+  },
+  "pooled_sources": {
+    "SiC": 6,
+    "GaN": 5
+  },
+  "pooled_correlation": {
+    "raw": {
+      "r": -0.0621280069894535,
+      "source_level_bootstrap_ci95": [
+        -0.45355148732970973,
+        0.4751618992913783
+      ],
+      "n_valid_resamples": 4963,
+      "row_level_p": 0.7630309332112322
+    },
+    "ceiling": {
+      "r": 0.15305670998383356,
+      "source_level_bootstrap_ci95": [
+        -0.17317066171600476,
+        0.5460343207410217
+      ],
+      "n_valid_resamples": 4949,
+      "row_level_p": 0.4553826918332717
+    },
+    "rank": {
+      "r": 0.010669780257471832,
+      "source_level_bootstrap_ci95": [
+        -0.2782936938099361,
+        0.5133539467597089
+      ],
+      "n_valid_resamples": 4946,
+      "row_level_p": 0.9587430327708524
+    },
+    "zscore": {
+      "r": 0.11515022136612582,
+      "source_level_bootstrap_ci95": [
+        -0.23738913585669988,
+        0.5562830093844298
+      ],
+      "n_valid_resamples": 4957,
+      "row_level_p": 0.5753804231034613
+    }
+  },
+  "ceiling_sweep": {
+    "r_min": -0.04999596315410679,
+    "r_max": 0.16509240168930395,
+    "grid": [
+      {
+        "ceiling_SiC": 2100,
+        "ceiling_GaN": 1480,
+        "r": 0.15305670998383356
+      },
+      {
+        "ceiling_SiC": 2100,
+        "ceiling_GaN": 1600,
+        "r": 0.10036265809789618
+      },
+      {
+        "ceiling_SiC": 2100,
+        "ceiling_GaN": 1800,
+        "r": -0.003463329046451538
+      },
+      {
+        "ceiling_SiC": 2100,
+        "ceiling_GaN": 2000,
+        "r": -0.04999596315410679
+      },
+      {
+        "ceiling_SiC": 2300,
+        "ceiling_GaN": 1480,
+        "r": 0.16509240168930395
+      },
+      {
+        "ceiling_SiC": 2300,
+        "ceiling_GaN": 1600,
+        "r": 0.15718485993869113
+      },
+      {
+        "ceiling_SiC": 2300,
+        "ceiling_GaN": 1800,
+        "r": 0.07394677726430121
+      },
+      {
+        "ceiling_SiC": 2300,
+        "ceiling_GaN": 2000,
+        "r": -0.012193849098582107
+      },
+      {
+        "ceiling_SiC": 2500,
+        "ceiling_GaN": 1480,
+        "r": 0.16143231297231336
+      },
+      {
+        "ceiling_SiC": 2500,
+        "ceiling_GaN": 1600,
+        "r": 0.16502935286949397
+      },
+      {
+        "ceiling_SiC": 2500,
+        "ceiling_GaN": 1800,
+        "r": 0.1435009826890673
+      },
+      {
+        "ceiling_SiC": 2500,
+        "ceiling_GaN": 2000,
+        "r": 0.05227864945455213
+      },
+      {
+        "ceiling_SiC": 2700,
+        "ceiling_GaN": 1480,
+        "r": 0.1567173793813818
+      },
+      {
+        "ceiling_SiC": 2700,
+        "ceiling_GaN": 1600,
+        "r": 0.1614933913774391
+      },
+      {
+        "ceiling_SiC": 2700,
+        "ceiling_GaN": 1800,
+        "r": 0.1640959083669347
+      },
+      {
+        "ceiling_SiC": 2700,
+        "ceiling_GaN": 2000,
+        "r": 0.12487870002257756
+      }
+    ]
+  },
+  "within_system_correlation": {
+    "SiC": {
+      "r": 0.050850483109054975,
+      "n": 17
+    },
+    "GaN": {
+      "r": 0.2255020526055953,
+      "n": 9
+    }
+  },
+  "six_system_summary": [
+    {
+      "system": "SiC",
+      "n_rows": 27,
+      "n_sources": 10,
+      "n_rows_anneal_and_activation": 17,
+      "n_sources_anneal_and_activation": 6,
+      "anneal_T_min": 1175.0,
+      "anneal_T_max": 2100.0,
+      "anneal_T_min_excluding_unverified": 1600.0
+    },
+    {
+      "system": "GaN",
+      "n_rows": 15,
+      "n_sources": 10,
+      "n_rows_anneal_and_activation": 9,
+      "n_sources_anneal_and_activation": 5,
+      "anneal_T_min": 1200.0,
+      "anneal_T_max": 1480.0,
+      "anneal_T_min_excluding_unverified": 1200.0
+    },
+    {
+      "system": "Diamond",
+      "n_rows": 9,
+      "n_sources": 8,
+      "n_rows_anneal_and_activation": 4,
+      "n_sources_anneal_and_activation": 4,
+      "anneal_T_min": 1150.0,
+      "anneal_T_max": 1600.0,
+      "anneal_T_min_excluding_unverified": 1150.0
+    },
+    {
+      "system": "GaAs",
+      "n_rows": 6,
+      "n_sources": 5,
+      "n_rows_anneal_and_activation": 1,
+      "n_sources_anneal_and_activation": 1,
+      "anneal_T_min": 550.0,
+      "anneal_T_max": 900.0,
+      "anneal_T_min_excluding_unverified": 550.0
+    },
+    {
+      "system": "InP",
+      "n_rows": 4,
+      "n_sources": 3,
+      "n_rows_anneal_and_activation": 1,
+      "n_sources_anneal_and_activation": 1,
+      "anneal_T_min": 700.0,
+      "anneal_T_max": 700.0,
+      "anneal_T_min_excluding_unverified": 700.0
+    },
+    {
+      "system": "Si",
+      "n_rows": 6,
+      "n_sources": 4,
+      "n_rows_anneal_and_activation": 3,
+      "n_sources_anneal_and_activation": 2,
+      "anneal_T_min": 750.0,
+      "anneal_T_max": 1250.0,
+      "anneal_T_min_excluding_unverified": 750.0
+    }
+  ],
+  "dataset_totals": {
+    "rows": 67,
+    "sources": 40
+  }
+}

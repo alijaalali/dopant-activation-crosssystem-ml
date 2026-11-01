@@ -1,0 +1,201 @@
+{
+  "anneal_T_only": {
+    "n": 9,
+    "n_sources": 5,
+    "rows_per_source": {
+      "Breckenridge2021": 4,
+      "G2_Hirukawa": 2,
+      "Rocco2020_JAP": 1,
+      "Sakurai2020_ISPSD": 1,
+      "Sumida2025_Ccap": 1
+    },
+    "coef": {
+      "anneal_T": 9.541535543654712
+    },
+    "intercept": 58.50136666666666,
+    "r2": 0.05085117572933662,
+    "r2_adj": -0.08474151345218672,
+    "bootstrap": {
+      "n_total_resamples": 3125,
+      "n_single_source": 5,
+      "n_rank_deficient": 30,
+      "n_valid": 3090,
+      "terms": {
+        "anneal_T": {
+          "ci95": [
+            -104.35424145237319,
+            39.44057820888863
+          ],
+          "min": -156.54099063378382,
+          "max": 43.59211156102409,
+          "n_distinct": 97,
+          "share_positive": 0.7815533980582524
+        }
+      }
+    },
+    "drop_source": {
+      "Breckenridge2021": {
+        "n_rows_remaining": 5,
+        "rank": 2,
+        "anneal_T": 24.9197602642192
+      },
+      "G2_Hirukawa": {
+        "n_rows_remaining": 7,
+        "rank": 2,
+        "anneal_T": -5.131797448302184
+      },
+      "Rocco2020_JAP": {
+        "n_rows_remaining": 8,
+        "rank": 2,
+        "anneal_T": 12.27832241275663
+      },
+      "Sakurai2020_ISPSD": {
+        "n_rows_remaining": 8,
+        "rank": 2,
+        "anneal_T": 6.960120462573446
+      },
+      "Sumida2025_Ccap": {
+        "n_rows_remaining": 8,
+        "rank": 2,
+        "anneal_T": 11.620857834457139
+      }
+    }
+  },
+  "anneal_T_only_without_Rocco2020": {
+    "n": 8,
+    "n_sources": 4,
+    "rows_per_source": {
+      "Breckenridge2021": 4,
+      "G2_Hirukawa": 2,
+      "Sakurai2020_ISPSD": 1,
+      "Sumida2025_Ccap": 1
+    },
+    "coef": {
+      "anneal_T": 13.035771784823515
+    },
+    "intercept": 65.81249999999999,
+    "r2": 0.11356738594434457,
+    "r2_adj": -0.03417138306493128,
+    "bootstrap": {
+      "n_total_resamples": 256,
+      "n_single_source": 4,
+      "n_rank_deficient": 14,
+      "n_valid": 238,
+      "terms": {
+        "anneal_T": {
+          "ci95": [
+            5.942309405561815,
+            40.86203437391003
+          ],
+          "min": 5.942309405561813,
+          "max": 43.51691231345785,
+          "n_distinct": 20,
+          "share_positive": 1.0
+        }
+      }
+    },
+    "drop_source": {
+      "Breckenridge2021": {
+        "n_rows_remaining": 4,
+        "rank": 2,
+        "anneal_T": 27.24135624927334
+      },
+      "G2_Hirukawa": {
+        "n_rows_remaining": 6,
+        "rank": 2,
+        "anneal_T": 5.942309405561822
+      },
+      "Sakurai2020_ISPSD": {
+        "n_rows_remaining": 7,
+        "rank": 2,
+        "anneal_T": 10.24947468319711
+      },
+      "Sumida2025_Ccap": {
+        "n_rows_remaining": 7,
+        "rank": 2,
+        "anneal_T": 14.723057231634264
+      }
+    }
+  },
+  "anneal_T_and_time": {
+    "n": 7,
+    "n_sources": 3,
+    "rows_per_source": {
+      "Breckenridge2021": 4,
+      "G2_Hirukawa": 2,
+      "Sumida2025_Ccap": 1
+    },
+    "coef": {
+      "anneal_T": 27.725819554968403,
+      "time": 25.558082552173435
+    },
+    "intercept": 75.21428571428572,
+    "r2": 0.537318121546895,
+    "r2_adj": 0.30597718232034243,
+    "bootstrap": {
+      "n_total_resamples": 27,
+      "n_single_source": 3,
+      "n_rank_deficient": 0,
+      "n_valid": 24,
+      "terms": {
+        "anneal_T": {
+          "ci95": [
+            18.03314891478286,
+            38.170399838989304
+          ],
+          "min": 18.033148914782853,
+          "max": 38.17039983898931,
+          "n_distinct": 6,
+          "share_positive": 1.0
+        },
+        "time": {
+          "ci95": [
+            12.88983239542472,
+            62.17984668148787
+          ],
+          "min": 12.889832395424712,
+          "max": 62.179846681487874,
+          "n_distinct": 6,
+          "share_positive": 1.0
+        }
+      }
+    },
+    "drop_source": {
+      "Breckenridge2021": {
+        "n_rows_remaining": 3,
+        "rank": 3,
+        "anneal_T": 38.1703998389893,
+        "time": 62.1798466814878
+      },
+      "G2_Hirukawa": {
+        "n_rows_remaining": 5,
+        "rank": 3,
+        "anneal_T": 18.430825848289587,
+        "time": 13.3297091473214
+      },
+      "Sumida2025_Ccap": {
+        "n_rows_remaining": 6,
+        "rank": 3,
+        "anneal_T": 27.839396427254385,
+        "time": 23.773101335989068
+      }
+    }
+  },
+  "breckenridge_only_anneal_T_and_time": {
+    "n": 4,
+    "anneal_T": 16.044157815229834,
+    "time": 14.433756729740665
+  },
+  "time_variation_by_source": {
+    "Breckenridge2021": [
+      10.0,
+      100.0
+    ],
+    "G2_Hirukawa": [
+      5.0
+    ],
+    "Sumida2025_Ccap": [
+      60.0
+    ]
+  }
+}

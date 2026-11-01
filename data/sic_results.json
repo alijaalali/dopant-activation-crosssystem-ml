@@ -1,0 +1,673 @@
+{
+  "data": {
+    "n_sic_rows_total": 27,
+    "n_sic_rows_anneal_and_activation": 17,
+    "n_model_rows": 15,
+    "model_sources": [
+      "S1_S2",
+      "S3",
+      "Saks2004",
+      "Weisse2019_AIPAdv"
+    ],
+    "rows_per_source": {
+      "S1_S2": 2,
+      "S3": 3,
+      "Saks2004": 8,
+      "Weisse2019_AIPAdv": 2
+    },
+    "anneal_T_range_model": [
+      1600.0,
+      1825.0
+    ],
+    "implant_T_range_model": [
+      25.0,
+      1000.0
+    ]
+  },
+  "ols": {
+    "intercept": 46.286666666666676,
+    "anneal_T": 5.31222288818746,
+    "implant_T": 29.464032775247635,
+    "r2": 0.5517184530297441,
+    "r2_adj": 0.4770048618680348
+  },
+  "cluster_bootstrap_exact": {
+    "n_total_resamples": 256,
+    "n_single_source": 4,
+    "n_rank_deficient": 14,
+    "n_valid": 238,
+    "terms": {
+      "anneal_T": {
+        "ci95": [
+          -43.53501742918596,
+          15.609518844962711
+        ],
+        "min": -43.535017429186034,
+        "max": 17.155319390063713,
+        "n_distinct": 26,
+        "share_positive": 0.680672268907563
+      },
+      "implant_T": {
+        "ci95": [
+          0.08501146364652304,
+          44.717749547085546
+        ],
+        "min": 0.08501146364648804,
+        "max": 48.985313510443376,
+        "n_distinct": 26,
+        "share_positive": 1.0
+      }
+    }
+  },
+  "row_level_bootstrap_for_comparison": {
+    "anneal_T": [
+      -17.198095516300956,
+      19.44583279576327
+    ],
+    "implant_T": [
+      12.172311059883398,
+      46.26159268621716
+    ]
+  },
+  "leave_one_source_out_coefficients": {
+    "S1_S2": {
+      "n_rows_remaining": 13,
+      "rank": 3,
+      "anneal_T": 3.5421268855367973,
+      "implant_T": 29.864797980055393
+    },
+    "S3": {
+      "n_rows_remaining": 12,
+      "rank": 3,
+      "anneal_T": 14.054898861703624,
+      "implant_T": 31.38133096120858
+    },
+    "Saks2004": {
+      "n_rows_remaining": 7,
+      "rank": 3,
+      "anneal_T": -16.137190179951965,
+      "implant_T": 13.349022314430975
+    },
+    "Weisse2019_AIPAdv": {
+      "n_rows_remaining": 13,
+      "rank": 3,
+      "anneal_T": 9.16059685845702,
+      "implant_T": 34.71495307942914
+    }
+  },
+  "random_intercept_model": {
+    "var_ratio_source_to_residual": 0.9061736676393158,
+    "df_used_for_ci": 3,
+    "anneal_T": {
+      "coef": 7.77254757073589,
+      "se": 7.5426720648727255,
+      "ci95_approx": [
+        -16.23160127408495,
+        31.776696415556728
+      ]
+    },
+    "implant_T": {
+      "coef": 33.90880738971397,
+      "se": 8.255442571279167,
+      "ci95_approx": [
+        7.636304680264754,
+        60.181310099163184
+      ]
+    }
+  },
+  "cross_validation": {
+    "multivariate_mae_4_sources": 31.60433490228963,
+    "univariate_anneal_only_mae": 34.14854072084705,
+    "univariate_n_rows": 17,
+    "univariate_n_sources": 6,
+    "mean_baseline_mae_4_sources": 34.41131868131868
+  },
+  "univariate_anneal_correlation": {
+    "n": 17,
+    "r": 0.050850483109054975,
+    "p": 0.8463196650349336
+  },
+  "thermal_budget": {
+    "n": 13,
+    "sources": [
+      "S3",
+      "Saks2004",
+      "Weisse2019_AIPAdv"
+    ],
+    "r2_budget_model": 0.6334158533793146,
+    "r2_adj_budget_model": 0.5600990240551775,
+    "r2_raw_anneal_model": 0.5761982919635644,
+    "r2_adj_raw_anneal_model": 0.49143795035627735
+  },
+  "hall_factor_sensitivity": {
+    "design": "per-source overstatement factor f_s applied as activation/f_s; grid f_s in {1,5}; Monte Carlo f_s log-uniform on [1,5]",
+    "uniform_scaling_ci_note": "a single factor applied to all rows rescales coefficients and intervals by 1/f and cannot change their sign or significance",
+    "grid_n": 16,
+    "grid_implant_T_min": -1.9907187506801622,
+    "grid_implant_T_max": 37.347558080977315,
+    "grid_n_positive": 12,
+    "grid_worst": {
+      "factors": {
+        "S1_S2": 1.0,
+        "S3": 1.0,
+        "Saks2004": 5.0,
+        "Weisse2019_AIPAdv": 1.0
+      },
+      "implant_T": -1.9907187506801622,
+      "anneal_T": 0.2035758397995546
+    },
+    "mc_implant_T_percentiles_2.5_50_97.5": [
+      1.6880552265070388,
+      12.963418961543375,
+      33.000684455863606
+    ],
+    "mc_share_positive": 0.9968
+  },
+  "model_panel": {
+    "summary": {
+      "n_models": 17,
+      "implant_T_positive": 17,
+      "implant_T_row_perm_p_lt_0.1": 11,
+      "anneal_T_positive": 9,
+      "anneal_T_row_perm_p_lt_0.1": 0,
+      "implant_T_positive_in_all_drop_source_fits": 9,
+      "implant_T_positive_without_Saks2004": 9,
+      "n_permutations": 500
+    },
+    "per_model": {
+      "OLS": {
+        "effect": {
+          "anneal_T": 10.624445776374927,
+          "implant_T": 58.92806555049525
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.68,
+          "implant_T": 0.008
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": 7.0842537710735485,
+            "implant_T": 59.72959596011078
+          },
+          "S3": {
+            "anneal_T": 28.109797723407247,
+            "implant_T": 62.76266192241716
+          },
+          "Saks2004": {
+            "anneal_T": -32.27438035990393,
+            "implant_T": 26.698044628861922
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": 18.321193716914085,
+            "implant_T": 69.4299061588583
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": true
+      },
+      "Ridge(a=1)": {
+        "effect": {
+          "anneal_T": 7.243887903442911,
+          "implant_T": 53.37324148646059
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.74,
+          "implant_T": 0.006
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": 3.3435937346842906,
+            "implant_T": 53.85080321222061
+          },
+          "S3": {
+            "anneal_T": 23.138299413174913,
+            "implant_T": 53.835860267141555
+          },
+          "Saks2004": {
+            "anneal_T": -27.48534450533596,
+            "implant_T": 20.782199416398825
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": 13.416285298802947,
+            "implant_T": 62.05437062268687
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": true
+      },
+      "Lasso(a=0.5)": {
+        "effect": {
+          "anneal_T": 8.412670255532447,
+          "implant_T": 56.716615812144035
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.694,
+          "implant_T": 0.006
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": 4.657338472528821,
+            "implant_T": 57.55743006647893
+          },
+          "S3": {
+            "anneal_T": 26.14228291899454,
+            "implant_T": 60.510325142106325
+          },
+          "Saks2004": {
+            "anneal_T": -31.21978359134866,
+            "implant_T": 24.48713834438726
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": 16.249657846754218,
+            "implant_T": 67.30348194455192
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": true
+      },
+      "ElasticNet": {
+        "effect": {
+          "anneal_T": 1.1598607850897196,
+          "implant_T": 42.20822202972523
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.926,
+          "implant_T": 0.006
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": -1.0085336762621324,
+            "implant_T": 44.43552740606915
+          },
+          "S3": {
+            "anneal_T": 16.251863098556385,
+            "implant_T": 41.275478782603955
+          },
+          "Saks2004": {
+            "anneal_T": -24.192324515879136,
+            "implant_T": 17.239928984525022
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": 6.035949617215621,
+            "implant_T": 49.95223590600375
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": true
+      },
+      "BayesianRidge": {
+        "effect": {
+          "anneal_T": 5.312634894893321,
+          "implant_T": 49.917688008321576
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.25,
+          "implant_T": 0.008
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": 0.9838185765432428,
+            "implant_T": 49.601779082913765
+          },
+          "S3": {
+            "anneal_T": 22.97352617792101,
+            "implant_T": 53.53323977214879
+          },
+          "Saks2004": {
+            "anneal_T": -18.964246407275,
+            "implant_T": 13.005888459720495
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": 13.974305984194771,
+            "implant_T": 62.92453355380017
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": true
+      },
+      "ARDRegression": {
+        "effect": {
+          "anneal_T": 0.0017592488714228693,
+          "implant_T": 50.14987188315476
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.6,
+          "implant_T": 0.002
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": 0.0005193485233832007,
+            "implant_T": 52.705600068753874
+          },
+          "S3": {
+            "anneal_T": 17.323344238279603,
+            "implant_T": 54.81118444229372
+          },
+          "Saks2004": {
+            "anneal_T": -24.580541313541698,
+            "implant_T": 2.9605974334636187
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": 3.9086287219153917,
+            "implant_T": 58.97823786603492
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": true
+      },
+      "HuberRegressor": {
+        "effect": {
+          "anneal_T": 12.86935440387684,
+          "implant_T": 60.09776421326788
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.682,
+          "implant_T": 0.018
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": 8.141025237823072,
+            "implant_T": 61.540819765575165
+          },
+          "S3": {
+            "anneal_T": 28.748976805137048,
+            "implant_T": 67.32076704597931
+          },
+          "Saks2004": {
+            "anneal_T": -44.23593430837197,
+            "implant_T": 17.59160678441158
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": 20.1664407821834,
+            "implant_T": 73.96457211429049
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": true
+      },
+      "PLSRegression(1comp)": {
+        "effect": {
+          "anneal_T": -14.7918393627575,
+          "implant_T": 40.0350223130849
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.4,
+          "implant_T": 0.024
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": -19.8471313500688,
+            "implant_T": 39.98950839594319
+          },
+          "S3": {
+            "anneal_T": 13.737390871357732,
+            "implant_T": 62.107194921463
+          },
+          "Saks2004": {
+            "anneal_T": -29.766638161356425,
+            "implant_T": 30.37060633141666
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": -14.231252370473413,
+            "implant_T": 44.883352392459734
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": true
+      },
+      "DecisionTree(d=2)": {
+        "effect": {
+          "anneal_T": -18.732142857142858,
+          "implant_T": 61.67619047619047
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.528,
+          "implant_T": 0.016
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": -31.200000000000003,
+            "implant_T": 62.23333333333333
+          },
+          "S3": {
+            "anneal_T": 0.0,
+            "implant_T": 41.58333333333333
+          },
+          "Saks2004": {
+            "anneal_T": -35.1,
+            "implant_T": 0.0
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": 0.0,
+            "implant_T": 80.67083333333333
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": false
+      },
+      "DecisionTree(d=3)": {
+        "effect": {
+          "anneal_T": -16.75,
+          "implant_T": 42.833333333333336
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.622,
+          "implant_T": 0.218
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": -16.7,
+            "implant_T": 34.5
+          },
+          "S3": {
+            "anneal_T": 19.7,
+            "implant_T": 37.166666666666664
+          },
+          "Saks2004": {
+            "anneal_T": -35.05,
+            "implant_T": 0.0
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": -20.42,
+            "implant_T": 74.18
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": false
+      },
+      "RandomForest(n=50,d=3)": {
+        "effect": {
+          "anneal_T": -9.901576190476188,
+          "implant_T": 50.15206190476191
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.734,
+          "implant_T": 0.068
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": -13.423185714285715,
+            "implant_T": 39.26707142857143
+          },
+          "S3": {
+            "anneal_T": 12.789047619047619,
+            "implant_T": 38.027952380952385
+          },
+          "Saks2004": {
+            "anneal_T": -41.3128,
+            "implant_T": 0.0
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": -12.225338095238095,
+            "implant_T": 72.7857619047619
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": false
+      },
+      "ExtraTrees(n=50,d=3)": {
+        "effect": {
+          "anneal_T": 1.2428293650793591,
+          "implant_T": 37.14405
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.94,
+          "implant_T": 0.072
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": -2.238014285714275,
+            "implant_T": 28.259028571428573
+          },
+          "S3": {
+            "anneal_T": 13.896666666666679,
+            "implant_T": 20.93900000000003
+          },
+          "Saks2004": {
+            "anneal_T": -30.298500000000015,
+            "implant_T": 5.425499999999992
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": 3.571190476190484,
+            "implant_T": 49.999333333333354
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": true
+      },
+      "AdaBoost(n=30)": {
+        "effect": {
+          "anneal_T": -12.08,
+          "implant_T": 34.714285714285715
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.79,
+          "implant_T": 0.41
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": -12.05,
+            "implant_T": 33.0
+          },
+          "S3": {
+            "anneal_T": 20.0,
+            "implant_T": 34.0
+          },
+          "Saks2004": {
+            "anneal_T": -33.1,
+            "implant_T": 0.0
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": -13.579999999999998,
+            "implant_T": 66.42
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": false
+      },
+      "KNN(k=3)": {
+        "effect": {
+          "anneal_T": -5.566666666666666,
+          "implant_T": 41.666666666666664
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.854,
+          "implant_T": 0.144
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": -0.9000000000000004,
+            "implant_T": 46.33333333333333
+          },
+          "S3": {
+            "anneal_T": 18.8,
+            "implant_T": 41.666666666666664
+          },
+          "Saks2004": {
+            "anneal_T": -34.36666666666666,
+            "implant_T": 0.0
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": -5.566666666666666,
+            "implant_T": 63.99999999999999
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": false
+      },
+      "KNN(k=5)": {
+        "effect": {
+          "anneal_T": -4.34,
+          "implant_T": 24.999999999999993
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.85,
+          "implant_T": 0.128
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": -8.940000000000001,
+            "implant_T": 32.39999999999999
+          },
+          "S3": {
+            "anneal_T": 19.68,
+            "implant_T": 24.999999999999993
+          },
+          "Saks2004": {
+            "anneal_T": 3.3999999999999986,
+            "implant_T": 0.0
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": -11.139999999999997,
+            "implant_T": 49.019999999999996
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": false
+      },
+      "GaussianProcess": {
+        "effect": {
+          "anneal_T": 6.44374233279618,
+          "implant_T": 19.25916883519676
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.48,
+          "implant_T": 0.198
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": 12.138323313311641,
+            "implant_T": 0.5128540627996756
+          },
+          "S3": {
+            "anneal_T": 32.18938334187174,
+            "implant_T": -8.81550818140407
+          },
+          "Saks2004": {
+            "anneal_T": 0.0,
+            "implant_T": 0.0
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": 12.18556654644787,
+            "implant_T": 57.700630583511
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": false
+      },
+      "SVR(rbf)": {
+        "effect": {
+          "anneal_T": -4.363587591087963,
+          "implant_T": 18.0211756215287
+        },
+        "row_permutation_p": {
+          "anneal_T": 0.8,
+          "implant_T": 0.242
+        },
+        "drop_source_effect": {
+          "S1_S2": {
+            "anneal_T": -6.453343506606611,
+            "implant_T": 20.01632290391087
+          },
+          "S3": {
+            "anneal_T": 3.6549927999080154,
+            "implant_T": 16.49908145231565
+          },
+          "Saks2004": {
+            "anneal_T": -12.85745336558297,
+            "implant_T": -5.530963770451805
+          },
+          "Weisse2019_AIPAdv": {
+            "anneal_T": -1.1344116174175198,
+            "implant_T": 25.618737107112658
+          }
+        },
+        "implant_T_positive_in_all_drop_source_fits": false
+      }
+    }
+  }
+}

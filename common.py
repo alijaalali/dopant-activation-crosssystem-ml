@@ -1,13 +1,25 @@
 import itertools
+import os
 from pathlib import Path
 
+import matplotlib
 import numpy as np
 import pandas as pd
+from matplotlib import font_manager
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
 FIG = ROOT / "figures"
 FIG.mkdir(exist_ok=True)
+
+for _otf in Path(os.environ.get("FIGURE_FONT_DIR", "fonts")).glob("*.otf"):
+    font_manager.fontManager.addfont(str(_otf))
+matplotlib.rcParams.update({
+    "font.family": "serif",
+    "font.serif": ["Times New Roman", "Times", "TeX Gyre Termes", "Nimbus Roman", "Liberation Serif", "DejaVu Serif"],
+    "mathtext.fontset": "stix",
+    "pdf.fonttype": 42,
+})
 
 
 def load():

@@ -42,6 +42,8 @@ Run from the repository root, in this order. Each script reads from `data/` and 
 
 ## Requirements
 
+Figures are drawn in a Times-type font. If Times New Roman, Times or Nimbus Roman is not installed, point `FIGURE_FONT_DIR` to a folder containing TeX Gyre Termes `.otf` files; otherwise matplotlib falls back to DejaVu Serif.
+
 Python 3.11 with the packages in `requirements.txt` (versions used: numpy 2.4, pandas 2.3, scipy 1.17, scikit-learn 1.9, matplotlib 3.11).
 
 ## Data notes

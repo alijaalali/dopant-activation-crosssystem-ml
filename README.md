@@ -4,7 +4,7 @@ Data and analysis scripts for the study of how implant temperature, anneal
 temperature and anneal time relate to the measured electrical activation of
 ion-implanted acceptors in Al/4H-SiC, Mg/GaN, B/diamond, Be/GaAs,
 Zn,Be,Mg/InP and B/Si. The dataset is compiled entirely from published
-literature (67 rows, 40 independent sources); no new atomistic, DFT or
+literature (initial compilation: 67 rows, 40 independent sources; enlarged database: 137 rows, 51 sources); no new atomistic, DFT or
 molecular-dynamics calculations were performed.
 
 ## Layout
@@ -13,6 +13,10 @@ molecular-dynamics calculations were performed.
 |---|---|
 | `common.py` | Data loading, standardization, exact source-level bootstrap, random-intercept (REML) fit |
 | `data/activation_dataset.csv` | Compiled dataset, one row per reported process condition, with DOI or arXiv identifier, `value_basis` (stated, derived, net_of_compensation, approximate, none) and `text_basis` (full_text or abstract_or_partial) flags |
+| `data/database.csv` | Enlarged database (initial compilation plus 70 verified rows from full-text papers) |
+| `data/expansion_verified.csv` | The added rows with location in the paper |
+| `data/reporting_audit.csv` | Reporting audit of the 13 full-text papers |
+| `explorer.html` | Static browser for the database |
 | `data/system_covariates.csv` | One value per host system, used for the temperature-scale sensitivity analysis |
 | `data/sources.md` | Sources per system and conventions used when compiling |
 | `data/*_results.json` | Numerical output of the scripts |
@@ -25,6 +29,14 @@ Run from the repository root, in this order. Each script reads from `data/` and 
 1. `01_sic_analysis.py` - SiC multivariate model of activation on standardized anneal and implant temperature; exact source-level bootstrap (all 256 ordered resamples of the 4 sources, with excluded resamples counted); row-level bootstrap for comparison; leave-one-source-out coefficients; random-intercept model; leave-one-source-out prediction error; thermal-budget covariate; per-source Hall-scattering-factor sensitivity (grid and Monte Carlo); 17-model specification panel with row-level permutation tests and leave-one-source-out sign checks; refits after removing sources with a different activation definition, the Saks et al. factorial alone, and a source fixed-effects model (`data/sic_results.json`).
 2. `02_gan_analysis.py` - GaN models of activation on anneal temperature, and on anneal temperature plus anneal time, with exactly enumerated source-level resampling and leave-one-source-out refits (`data/gan_results.json`).
 3. `03_cross_system.py` - pooled SiC/GaN correlation under four temperature scales with a source-level bootstrap, ceiling sweep, per-system summary, counts of rows by value basis and text basis, the Hall-factor reporting count by text basis, the pooled correlation excluding approximate rows, and figures (`data/cross_system_results.json`).
+
+4. `04_build_database.py` - merges the initial compilation with `data/expansion_verified.csv` into `data/database.csv` (laboratory group, year, activation-definition class, assumed implant temperature flag).
+5. `05_hierarchical_model.py` - Bayesian linear mixed model of logit activation with source and laboratory intercepts for Al-implanted SiC, with leave-one-source-out and prior sensitivity analyses (`data/hierarchical_results.json`, `figures/design_map.png`).
+6. `06_kinetic_validation.py` - Arrhenius-equivalent-time model, and leave-one-source-out, leave-one-laboratory-out and temporal evaluation of five predictors (`data/kinetic_validation_results.json`).
+7. `07_method_dependence_audit.py` - difference between two analysis methods applied to the same samples, and the reporting audit of the full-text papers (`data/method_audit_results.json`).
+8. `08_build_explorer.py` - writes `explorer.html`, a static page for browsing and filtering the database.
+
+`common.py` and `models.py` hold shared helpers (data loading, exact source-level bootstrap, REML and Gibbs mixed-model fits).
 
 ## Requirements
 

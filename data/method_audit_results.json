@@ -1,0 +1,44 @@
+{
+  "same_samples_two_fitting_methods": {
+    "n_samples": 9,
+    "mean_difference_pp": 23.88888888888889,
+    "min_pp": 0.0,
+    "max_pp": 49.0,
+    "sd_pp": 13.13815478334424,
+    "p_gt_pmu_in_samples": 8
+  },
+  "same_nominal_conditions_two_papers": [
+    {
+      "conc_cm3": 1e+19,
+      "anneal": "1600 C, 30 min",
+      "ECS_Trans_92": 40,
+      "MSF_1062_p": 60,
+      "MSF_1062_p-mu": 31
+    },
+    {
+      "conc_cm3": 3e+18,
+      "anneal": "1600 C, 30 min",
+      "ECS_Trans_92": 81,
+      "MSF_1062_p": 96,
+      "MSF_1062_p-mu": 77
+    }
+  ],
+  "audit": {
+    "n_papers_read_in_full": 13,
+    "reports_implant_temperature": 10,
+    "reports_anneal_time": 13,
+    "temperature_dependent_hall": 9,
+    "ionization_correction": 5,
+    "compensation_reported": 5,
+    "activation_defined_in_text": 7,
+    "data_availability_statement": 0,
+    "hall_factor_value_or_model_stated": 5,
+    "hall_factor_not_stated": 6
+  },
+  "database": {
+    "rows": 137,
+    "sources": 51,
+    "sic_rows": 97,
+    "sic_sources": 21
+  }
+}

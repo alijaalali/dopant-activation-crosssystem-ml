@@ -16,6 +16,14 @@ cov = pd.read_csv(DATA / "system_covariates.csv")
 ceil = {"SiC": float(cov[(cov.system == "SiC") & (cov.covariate == "practical_anneal_ceiling")].value.iloc[0]),
         "GaN": float(cov[(cov.system == "GaN") & (cov.covariate == "practical_anneal_ceiling_UHPA")].value.iloc[0])}
 pool = df[df.system.isin(["SiC", "GaN"])].dropna(subset=["anneal_T", "act"]).reset_index(drop=True)
+basis = df.groupby(["system", "value_basis"]).size().unstack(fill_value=0)
+OUT["value_basis_counts"] = {s: {k: int(v) for k, v in basis.loc[s].items()} for s in basis.index}
+OUT["text_basis_counts"] = {k: int(v) for k, v in df.text_basis.value_counts().items()}
+hall = df[df.measurement_technique.str.contains("Hall", na=False) & ~df.measurement_technique.str.contains("not_Hall", na=False)]
+OUT["hall_convention_by_text_basis"] = {
+    tb: {"hall_rows": int(len(g)), "state_convention": int(g.hall_factor_convention.notna().sum())}
+    for tb, g in hall.groupby("text_basis")}
+print(OUT["value_basis_counts"], OUT["text_basis_counts"], OUT["hall_convention_by_text_basis"])
 OUT["pooled_n"] = {s: int((pool.system == s).sum()) for s in ["SiC", "GaN"]}
 OUT["pooled_sources"] = {s: int(pool[pool.system == s].source_id.nunique()) for s in ["SiC", "GaN"]}
 
@@ -66,6 +74,12 @@ for kind in ["raw", "ceiling", "rank", "zscore"]:
     OUT["pooled_correlation"][kind] = {"r": r, "source_level_bootstrap_ci95": ci, "n_valid_resamples": nv,
                                        "row_level_p": float(stats.pearsonr(normalize(pool, kind), pool.act)[1])}
     print(kind, OUT["pooled_correlation"][kind])
+
+pool_noapprox = pool[pool.value_basis != "approximate"].reset_index(drop=True)
+OUT["pooled_correlation_excluding_approximate_rows"] = {
+    "n": {s: int((pool_noapprox.system == s).sum()) for s in ["SiC", "GaN"]},
+    **{kind: pooled_r(pool_noapprox, kind) for kind in ["raw", "ceiling", "rank", "zscore"]}}
+print("excluding approximate rows", OUT["pooled_correlation_excluding_approximate_rows"])
 
 grid = []
 for cs, cg in itertools.product([2100, 2300, 2500, 2700], [1480, 1600, 1800, 2000]):

@@ -95,6 +95,103 @@
       "implant_T": 34.71495307942914
     }
   },
+  "definition_and_source_subsets": {
+    "all_four_sources": {
+      "n_rows": 15,
+      "sources": [
+        "S1_S2",
+        "S3",
+        "Saks2004",
+        "Weisse2019_AIPAdv"
+      ],
+      "design_rank": 3,
+      "anneal_T": 5.31222288818746,
+      "implant_T": 29.464032775247635,
+      "implant_T_distinct_values": [
+        25.0,
+        500.0,
+        650.0,
+        1000.0
+      ]
+    },
+    "without_Weisse_net_of_compensation_definition": {
+      "n_rows": 13,
+      "sources": [
+        "S1_S2",
+        "S3",
+        "Saks2004"
+      ],
+      "design_rank": 3,
+      "anneal_T": 9.16059685845702,
+      "implant_T": 34.71495307942914,
+      "implant_T_distinct_values": [
+        25.0,
+        500.0,
+        650.0,
+        1000.0
+      ]
+    },
+    "without_Negoro_derived_ratio_assumed_depth": {
+      "n_rows": 12,
+      "sources": [
+        "S1_S2",
+        "Saks2004",
+        "Weisse2019_AIPAdv"
+      ],
+      "design_rank": 3,
+      "anneal_T": 14.054898861703624,
+      "implant_T": 31.38133096120858,
+      "implant_T_distinct_values": [
+        500.0,
+        650.0,
+        1000.0
+      ]
+    },
+    "without_Negoro_and_Weisse": {
+      "n_rows": 10,
+      "sources": [
+        "S1_S2",
+        "Saks2004"
+      ],
+      "design_rank": 3,
+      "anneal_T": 15.609518844962691,
+      "implant_T": 42.325392690036054,
+      "implant_T_distinct_values": [
+        500.0,
+        650.0,
+        1000.0
+      ]
+    },
+    "Saks_only": {
+      "n_rows": 8,
+      "sources": [
+        "Saks2004"
+      ],
+      "design_rank": 3,
+      "anneal_T": 10.236710176521328,
+      "implant_T": 56.6095384587194,
+      "implant_T_distinct_values": [
+        650.0,
+        1000.0
+      ],
+      "mean_activation_by_implant_T": {
+        "650": 20.65,
+        "1000": 94.25
+      }
+    },
+    "stated_Hall_rows_only_S1_S2": {
+      "n_rows": 2,
+      "implant_T_distinct_values": [
+        500.0
+      ],
+      "note": "implant temperature is constant, so the coefficient is not estimable"
+    },
+    "source_fixed_effects": {
+      "anneal_T": 9.609727927749354,
+      "implant_T": 35.10758456491406,
+      "design_rank": 6
+    }
+  },
   "random_intercept_model": {
     "var_ratio_source_to_residual": 0.9061736676393158,
     "df_used_for_ci": 3,

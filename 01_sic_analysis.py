@@ -74,6 +74,40 @@ for s in uniq:
 OUT["leave_one_source_out_coefficients"] = loso
 print("LOSO coefficients", loso)
 
+def subset_fit(mask, label):
+    m = np.asarray(mask)
+    A = np.column_stack([np.ones(m.sum()), Xz[m]])
+    rank = int(np.linalg.matrix_rank(A))
+    b = np.linalg.lstsq(A, y[m], rcond=None)[0]
+    entry = {"n_rows": int(m.sum()), "sources": sorted(set(src[m])), "design_rank": rank,
+             "anneal_T": float(b[1]), "implant_T": float(b[2]),
+             "implant_T_distinct_values": sorted(set(Xraw[m, 1].tolist()))}
+    return label, entry
+
+
+sub = {}
+for label, mask in [
+        ("all_four_sources", np.ones(n, bool)),
+        ("without_Weisse_net_of_compensation_definition", src != "Weisse2019_AIPAdv"),
+        ("without_Negoro_derived_ratio_assumed_depth", src != "S3"),
+        ("without_Negoro_and_Weisse", np.isin(src, ["S1_S2", "Saks2004"])),
+        ("Saks_only", src == "Saks2004")]:
+    k, v = subset_fit(mask, label)
+    sub[k] = v
+sk = src == "Saks2004"
+sub["Saks_only"]["mean_activation_by_implant_T"] = {
+    str(int(t)): float(y[sk & (Xraw[:, 1] == t)].mean()) for t in sorted(set(Xraw[sk, 1]))}
+hall_direct = src == "S1_S2"
+sub["stated_Hall_rows_only_S1_S2"] = {"n_rows": int(hall_direct.sum()),
+                                     "implant_T_distinct_values": sorted(set(Xraw[hall_direct, 1].tolist())),
+                                     "note": "implant temperature is constant, so the coefficient is not estimable"}
+D = np.column_stack([(src == s).astype(float) for s in uniq] + [Xz])
+bfe = np.linalg.lstsq(D, y, rcond=None)[0]
+sub["source_fixed_effects"] = {"anneal_T": float(bfe[len(uniq)]), "implant_T": float(bfe[len(uniq) + 1]),
+                               "design_rank": int(np.linalg.matrix_rank(D))}
+OUT["definition_and_source_subsets"] = sub
+print("subsets", json.dumps(sub))
+
 fit_mixed = reml_random_intercept(Xz, y, src)
 tcrit = stats.t.ppf(0.975, df=len(uniq) - 1)
 OUT["random_intercept_model"] = {

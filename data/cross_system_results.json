@@ -1,4 +1,62 @@
 {
+  "value_basis_counts": {
+    "Diamond": {
+      "approximate": 1,
+      "derived": 0,
+      "net_of_compensation": 0,
+      "none": 4,
+      "stated": 4
+    },
+    "GaAs": {
+      "approximate": 2,
+      "derived": 0,
+      "net_of_compensation": 0,
+      "none": 1,
+      "stated": 3
+    },
+    "GaN": {
+      "approximate": 4,
+      "derived": 5,
+      "net_of_compensation": 0,
+      "none": 1,
+      "stated": 5
+    },
+    "InP": {
+      "approximate": 2,
+      "derived": 0,
+      "net_of_compensation": 0,
+      "none": 0,
+      "stated": 2
+    },
+    "Si": {
+      "approximate": 3,
+      "derived": 1,
+      "net_of_compensation": 0,
+      "none": 2,
+      "stated": 0
+    },
+    "SiC": {
+      "approximate": 0,
+      "derived": 3,
+      "net_of_compensation": 4,
+      "none": 1,
+      "stated": 19
+    }
+  },
+  "text_basis_counts": {
+    "abstract_or_partial": 50,
+    "full_text": 17
+  },
+  "hall_convention_by_text_basis": {
+    "abstract_or_partial": {
+      "hall_rows": 42,
+      "state_convention": 1
+    },
+    "full_text": {
+      "hall_rows": 17,
+      "state_convention": 0
+    }
+  },
   "pooled_n": {
     "SiC": 17,
     "GaN": 9
@@ -44,6 +102,16 @@
       "n_valid_resamples": 4957,
       "row_level_p": 0.5753804231034613
     }
+  },
+  "pooled_correlation_excluding_approximate_rows": {
+    "n": {
+      "SiC": 17,
+      "GaN": 6
+    },
+    "raw": -0.044121998676269675,
+    "ceiling": 0.04322490780645097,
+    "rank": -0.07154026159513108,
+    "zscore": 0.012146933127491363
   },
   "ceiling_sweep": {
     "r_min": -0.04999596315410679,

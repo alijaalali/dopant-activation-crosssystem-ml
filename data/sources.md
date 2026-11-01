@@ -6,6 +6,7 @@ Each row of `activation_dataset.csv` is identified by `source_id` and a DOI or a
 
 - `activation_pct` is taken from the source where it is stated. Rows whose note begins with *Derived* were computed from other quantities reported in the source (for example hole concentration divided by implanted concentration or dose); the formula is given in `activation_pct_note`.
 - Activation is not defined identically across sources: most rows are Hall-based ratios of hole concentration to implanted concentration or dose, some are resistivity-derived with 100% taken as the maximum, and two rows are net values equal to 100% minus a fitted compensation ratio. These distinctions are recorded in `measurement_technique` and `activation_pct_note`.
+- `value_basis` is one of `stated`, `derived`, `net_of_compensation`, `approximate` (qualitative wording, a bound, or a midpoint, entered as a number) or `none`; `text_basis` is `full_text` for Negoro et al., Saks et al., Weiße et al. (AIP Advances) and Breckenridge et al., and `abstract_or_partial` otherwise.
 - Rows with `NA` in `anneal_temp_C` or `activation_pct` are kept as qualitative context and are not used in fitted models.
 - The implant temperature of the `S1_S2` rows is not entered in the CSV; the analysis scripts set it to 500 C, the value given in the methods of the source.
 - `hall_factor_convention` records whether a source states the Hall scattering factor used; `NA` means that no statement was found in the text that was compiled.

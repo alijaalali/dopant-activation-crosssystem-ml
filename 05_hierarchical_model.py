@@ -4,82 +4,87 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 
 from common import DATA, FIG
-from models import gibbs_mixed, inv_logit, logit_act, summarize
+from models import FEATS, fit_hier, inv_logit, load_sic_al
 
-db = pd.read_csv(DATA / "database.csv")
-al = db[(db.system == "SiC") & (db.dopant == "Al")].copy()
-al["log_time"] = np.log10(al.anneal_time_min)
-al["log_conc"] = np.log10(al.implanted_conc_cm3)
-need = ["activation_pct", "anneal_temp_C", "anneal_time_min", "implant_temp_C", "implanted_conc_cm3"]
-al = al.dropna(subset=need)
-al = al[(al.definition_class != "approximate") & (~al.two_step_anneal.fillna(False).astype(bool))].reset_index(drop=True)
-FEATS = ["implant_temp_C", "anneal_temp_C", "log_time", "log_conc"]
+al = load_sic_al(DATA / "database.csv")
 print("rows", len(al), "sources", al.source_id.nunique(), al.source_id.value_counts().to_dict())
+lab = al.lab_group.fillna(al.source_id)
 
 
-def fit(frame, feats=FEATS, use_lab=True, beta_sd=5.0, seed=1, n_iter=8000, burn=3000):
-    X = frame[feats].to_numpy(float)
-    mu, sd = X.mean(0), X.std(0, ddof=1)
-    Xz = (X - mu) / sd
-    A = np.column_stack([np.ones(len(frame)), Xz])
-    y = logit_act(frame.activation_pct)
-    src = pd.factorize(frame.source_id)[0]
-    groups = [src]
-    if use_lab:
-        groups.append(pd.factorize(frame.lab_group.fillna(frame.source_id))[0])
-    dr = gibbs_mixed(A, y, groups, n_iter=n_iter, burn=burn, seed=seed, beta_sd=beta_sd)
-    s = summarize(dr, ["intercept"] + feats)
-    s["sd_source"] = float(np.sqrt(dr["s2u"][:, 0]).mean())
-    s["sd_residual"] = float(np.sqrt(dr["s2e"]).mean())
-    mid = np.zeros(len(feats))
-    lo, hi = mid.copy(), mid.copy()
-    pp = {}
-    for j, f in enumerate(feats):
-        a, b = np.zeros(A.shape[1]), np.zeros(A.shape[1])
-        a[0] = b[0] = 1
-        a[1 + j], b[1 + j] = 0.5, -0.5
-        eff = 100 * (inv_logit(dr["beta"] @ a) - inv_logit(dr["beta"] @ b))
-        pp[f] = {"mean": float(eff.mean()), "ci95": [float(np.percentile(eff, 2.5)), float(np.percentile(eff, 97.5))],
-                 "p_positive": float(np.mean(eff > 0))}
-    s["marginal_effect_pp_per_sd"] = pp
-    s["feature_sd"] = {f: float(v) for f, v in zip(feats, sd)}
-    return s, dr, (mu, sd)
+def strip(res):
+    return {k: v for k, v in res.items() if k != "_draws"}
 
 
-OUT = {"n_rows": len(al), "n_sources": int(al.source_id.nunique()), "rows_per_source": al.source_id.value_counts().to_dict()}
-main, draws, (mu, sd) = fit(al)
-OUT["main"] = main
-print("main", json.dumps({k: main[k] for k in ["implant_temp_C", "anneal_temp_C", "log_time", "log_conc"]}))
+OUT = {"n_rows": len(al), "n_sources": int(al.source_id.nunique()), "n_labs": int(lab.nunique()),
+       "rows_per_source": al.source_id.value_counts().to_dict(),
+       "sources_per_lab": al.groupby(lab).source_id.nunique().to_dict(),
+       "rows_per_lab": lab.value_counts().to_dict()}
+main = fit_hier(al)
+draws = main["_draws"]
+OUT["main"] = strip(main)
+OUT["main"]["sd_source"] = main["sd"]["source"]["mean"]
+OUT["main"]["sd_residual"] = main["sd"]["residual"]["mean"]
+for k in FEATS:
+    print(k, main["coef"][k]["mean"], main["coef"][k]["ci95"], main["coef"][k]["rhat"], main["coef"][k]["ess"])
+print("sd", {k: (v["mean"], v["ci95"], v["rhat"], v["ess"]) for k, v in main["sd"].items()})
+print("share", {k: (v["mean"], v["ci95"]) for k, v in main["share"].items()})
+
+rng = np.random.default_rng(0)
+prior_var = 1.0 / rng.gamma(2.0, 1.0, size=200000)
+OUT["prior_sd_inverse_gamma_2_1"] = {"median": float(np.median(np.sqrt(prior_var))),
+                                     "ci95": [float(np.percentile(np.sqrt(prior_var), 2.5)),
+                                              float(np.percentile(np.sqrt(prior_var), 97.5))]}
+
+factor_models = {}
+for f in ["source", "lab"]:
+    r = fit_hier(al, factors=f)
+    factor_models[f] = strip(r)
+    print("factors", f, r["sd"], r["share"]["between_groups_total"]["mean"])
+OUT["factor_variants"] = factor_models
+
 sens = {}
-for label, frame, kw in [
-        ("drop_Saks2004", al[al.source_id != "Saks2004"], {}),
-        ("drop_Saks2001", al[al.source_id != "Saks2001_JAP"], {}),
-        ("drop_ECS92_implantT_is_range", al[al.source_id != "Nipoti2019_ECSTrans"], {}),
-        ("drop_Pernot", al[al.source_id != "Pernot2005_JAP"], {}),
-        ("no_lab_effect", al, {"use_lab": False}),
-        ("prior_sd_2", al, {"beta_sd": 2.0}),
-        ("prior_sd_10", al, {"beta_sd": 10.0}),
-        ("without_conc", al, {"feats": ["implant_temp_C", "anneal_temp_C", "log_time"]})]:
-    s, _, _ = fit(frame, **kw)
-    sens[label] = {"n_rows": len(frame), "n_sources": int(frame.source_id.nunique()), "implant_T": s["implant_temp_C"],
-                   "marginal_pp": s["marginal_effect_pp_per_sd"]["implant_temp_C"]}
-    print(label, len(frame), sens[label]["implant_T"]["mean"], sens[label]["implant_T"]["ci95"], sens[label]["implant_T"]["p_positive"])
+variants = [
+    ("drop_Saks2004", al[al.source_id != "Saks2004"], {}),
+    ("drop_Saks2001", al[al.source_id != "Saks2001_JAP"], {}),
+    ("drop_ECS92_implantT_is_range", al[al.source_id != "Nipoti2019_ECSTrans"], {}),
+    ("drop_Pernot", al[al.source_id != "Pernot2005_JAP"], {}),
+    ("no_lab_effect", al, {"factors": "source"}),
+    ("prior_sd_2", al, {"beta_sd": 2.0}),
+    ("prior_sd_10", al, {"beta_sd": 10.0}),
+    ("without_conc", al, {"feats": ["implant_temp_C", "anneal_temp_C", "log_time"]})]
+for label, frame, kw in variants:
+    r = fit_hier(frame.reset_index(drop=True), **kw)
+    sens[label] = {"n_rows": len(frame), "n_sources": int(frame.source_id.nunique()),
+                   "implant_T": r["coef"]["implant_temp_C"], "marginal_pp": r["marginal_effect_pp_per_sd"]["implant_temp_C"],
+                   "share_between_groups": r["share"]["between_groups_total"]}
+    print(label, len(frame), sens[label]["marginal_pp"])
 OUT["sensitivity"] = sens
+
+nos = al[al.source_id != "Saks2004"]
+OUT["implant_T_range"] = {
+    "all": {"min": float(al.implant_temp_C.min()), "max": float(al.implant_temp_C.max()),
+            "distinct": sorted(float(v) for v in al.implant_temp_C.unique()), "sd": float(al.implant_temp_C.std(ddof=1))},
+    "without_Saks2004": {"min": float(nos.implant_temp_C.min()), "max": float(nos.implant_temp_C.max()),
+                         "distinct": sorted(float(v) for v in nos.implant_temp_C.unique()),
+                         "sd": float(nos.implant_temp_C.std(ddof=1)),
+                         "rows_per_level": {str(k): int(v) for k, v in nos.implant_temp_C.value_counts().items()},
+                         "sources_per_level": {str(k): sorted(nos[nos.implant_temp_C == k].source_id.unique())
+                                               for k in sorted(nos.implant_temp_C.unique())}},
+    "per_source": {s: sorted(float(v) for v in g.implant_temp_C.unique()) for s, g in al.groupby("source_id")}}
 json.dump(OUT, open(DATA / "hierarchical_results.json", "w"), indent=2)
 
+mu, sd = draws["mu"], draws["sd"]
+beta = draws["beta"].mean(0)
 grid_i = np.linspace(25, 1000, 40)
 grid_a = np.linspace(1500, 1950, 40)
-fig, ax = plt.subplots(figsize=(6, 4.6))
-tt, cc = 30.0, 1e20
 Z = np.zeros((len(grid_a), len(grid_i)))
-bm = draws["beta"].mean(0)
 for ia, a in enumerate(grid_a):
     for ii, i in enumerate(grid_i):
-        x = (np.array([i, a, np.log10(tt), np.log10(cc)]) - mu) / sd
-        Z[ia, ii] = 100 * inv_logit(bm[0] + x @ bm[1:])
+        x = (np.array([i, a, np.log10(30.0), np.log10(1e20)]) - mu) / sd
+        Z[ia, ii] = 100 * inv_logit(beta[0] + x @ beta[1:])
+fig, ax = plt.subplots(figsize=(6, 4.6))
 cs = ax.contourf(grid_i, grid_a, Z, levels=np.linspace(0, 100, 11), cmap="viridis")
 pts = al.drop_duplicates(["implant_temp_C", "anneal_temp_C"])
 ax.scatter(pts.implant_temp_C, pts.anneal_temp_C, c="w", edgecolor="k", s=25)

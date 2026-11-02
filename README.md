@@ -19,6 +19,7 @@ molecular-dynamics calculations were performed.
 | `explorer.html` | Static browser for the database |
 | `data/system_covariates.csv` | One value per host system, used for the temperature-scale sensitivity analysis |
 | `data/sources.md` | Sources per system and conventions used when compiling |
+| `data/DATA_DICTIONARY.md` | Variables, units, missing-value convention, derivation and inclusion flags |
 | `data/*_results.json` | Numerical output of the scripts |
 | `figures/` | Figures produced by the scripts |
 
@@ -37,6 +38,10 @@ Run from the repository root, in this order. Each script reads from `data/` and 
 8. `08_build_explorer.py` - writes `explorer.html`, a static page for browsing and filtering the database.
 
 9. `09_graphical_abstract.py` - draws the graphical abstract from the saved results (`figures/graphical_abstract.png`).
+10. `10_sensitivity_analyses.py` - clipping bounds, variance priors, restricted subsets by definition of activation, measurement-error scenarios and the row counts at each selection step (`data/sensitivity_results.json`).
+11. `11_dataset_flowchart.py` - draws the dataset-selection flowchart (`figures/dataset_flowchart.png`).
+
+Suggested order: 01, 04, 05, 10, 06, 07, 02, 03, 11, 09, 08. Scripts 05, 06 and 10 use four Gibbs chains with seeds 1-4 and dispersed starting values; the bootstrap over held-out units uses seed 0.
 
 `common.py` and `models.py` hold shared helpers (data loading, exact source-level bootstrap, REML and Gibbs mixed-model fits).
 
@@ -44,7 +49,7 @@ Run from the repository root, in this order. Each script reads from `data/` and 
 
 Figures are drawn in a Times-type font. If Times New Roman, Times or Nimbus Roman is not installed, point `FIGURE_FONT_DIR` to a folder containing TeX Gyre Termes `.otf` files; otherwise matplotlib falls back to DejaVu Serif.
 
-Python 3.11 with the packages in `requirements.txt` (versions used: numpy 2.4, pandas 2.3, scipy 1.17, scikit-learn 1.9, matplotlib 3.11).
+Python 3.11.16 with the packages in `requirements.txt` (versions used: numpy 2.4.6, pandas 2.3.3, scipy 1.17.1, scikit-learn 1.9.1, matplotlib 3.11.1). The repository is tagged v1.1 for the analysis reported in the manuscript.
 
 ## Data notes
 

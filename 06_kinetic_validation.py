@@ -48,6 +48,9 @@ def mixed_predict(train, test, kind, ea=None):
     return 100 * inv_logit(np.column_stack([np.ones(len(test)), (Xte - mu) / sd]) @ beta)
 
 
+CHOSEN = []
+
+
 def kinetic_predict(train, test):
     best, best_err = None, np.inf
     for ea in EA_GRID:
@@ -62,6 +65,7 @@ def kinetic_predict(train, test):
             if e < best_err:
                 best, best_err = ea, e
     ea = best if best is not None else 2.0
+    CHOSEN.append({"held_out": sorted(test.source_id.unique()), "selected_Ea_eV": ea})
     return mixed_predict(train, test, "kinetic", ea)
 
 
@@ -84,38 +88,56 @@ MODELS = {
 }
 
 
-def evaluate(splits):
+def evaluate(splits, units):
     res = {}
     for name, fn in MODELS.items():
-        errs, preds, trues = [], [], []
-        for tr, te in splits:
+        errs, preds, trues, per_unit = [], [], [], {}
+        for (tr, te), u in zip(splits, units):
             p = fn(tr, te)
-            errs.append(np.abs(p - te.activation_pct.to_numpy()))
+            e_i = np.abs(p - te.activation_pct.to_numpy())
+            errs.append(e_i)
+            per_unit[u] = (float(e_i.mean()), int(len(e_i)))
             preds.append(p)
             trues.append(te.activation_pct.to_numpy())
         e = np.concatenate(errs)
         P, T = np.concatenate(preds), np.concatenate(trues)
         res[name] = {"mae_pp": float(e.mean()), "median_abs_error_pp": float(np.median(e)), "n_test": int(len(e)),
-                     "spearman": float(stats.spearmanr(P, T)[0]) if np.std(P) > 0 else None}
+                     "spearman": float(stats.spearmanr(P, T)[0]) if np.std(P) > 0 else None,
+                     "per_unit_mae_pp": {u: v[0] for u, v in per_unit.items()},
+                     "unit_mean_mae_pp": float(np.mean([v[0] for v in per_unit.values()]))}
+    base = res["training_mean"]["per_unit_mae_pp"]
+    rng = np.random.default_rng(0)
+    for name, v in res.items():
+        d = np.array([v["per_unit_mae_pp"][u] - base[u] for u in base])
+        boot = np.array([d[rng.integers(0, len(d), len(d))].mean() for _ in range(20000)])
+        v["paired_vs_mean"] = {"mean_difference_pp": float(d.mean()), "units_better_than_mean": int((d < 0).sum()),
+                               "units": int(len(d)), "unit_bootstrap_ci95": [float(np.percentile(boot, 2.5)), float(np.percentile(boot, 97.5))]}
     return res
 
 
 def leave_one(col):
-    return [(al[al[col] != v], al[al[col] == v]) for v in al[col].unique()]
+    vals = list(al[col].unique())
+    return [(al[al[col] != v], al[al[col] == v]) for v in vals], [str(v) for v in vals]
 
 
-OUT["leave_one_source_out"] = evaluate(leave_one("source_id"))
+CHOSEN.clear()
+OUT["leave_one_source_out"] = evaluate(*leave_one("source_id"))
+OUT["selected_Ea_by_fold_loso"] = list(CHOSEN)
+CHOSEN.clear()
 al["lab"] = al.lab_group.fillna(al.source_id)
-OUT["leave_one_lab_out"] = evaluate(leave_one("lab"))
+OUT["leave_one_lab_out"] = evaluate(*leave_one("lab"))
+OUT["selected_Ea_by_fold_lolo"] = list(CHOSEN)
+CHOSEN.clear()
 old, new = al[al.year <= 2005], al[al.year >= 2017]
 OUT["temporal"] = {"train_years": "<=2005", "test_years": ">=2017", "n_train": len(old), "n_test": len(new),
                    "train_sources": sorted(old.source_id.unique()), "test_sources": sorted(new.source_id.unique()),
-                   **evaluate([(old, new)])}
+                   **evaluate([(old, new)], ["temporal_test_set"])}
+OUT["selected_Ea_temporal"] = list(CHOSEN)
 for k in ["leave_one_source_out", "leave_one_lab_out", "temporal"]:
     print(k)
     for m, v in OUT[k].items():
-        if isinstance(v, dict):
-            print("  ", m, round(v["mae_pp"], 1), v["spearman"])
+        if isinstance(v, dict) and "mae_pp" in v:
+            print("  ", m, round(v["mae_pp"], 1), v["spearman"], v["paired_vs_mean"]["units_better_than_mean"], "/", v["paired_vs_mean"]["units"])
 
 prof = {}
 for ea in EA_GRID:
@@ -131,6 +153,19 @@ for kind in ["linear", "linear_no_implant"]:
         tr, te = al[al.source_id != s], al[al.source_id == s]
         errs.append(np.abs(mixed_predict(tr, te, kind) - te.activation_pct.to_numpy()))
     base[kind] = float(np.concatenate(errs).mean())
+ext = {}
+for ea in [12, 15, 20, 30, 50]:
+    errs = []
+    for sid in al.source_id.unique():
+        tr, te = al[al.source_id != sid], al[al.source_id == sid]
+        errs.append(np.abs(mixed_predict(tr, te, "kinetic", ea) - te.activation_pct.to_numpy()))
+    ext[ea] = float(np.concatenate(errs).mean())
+OUT["kinetic_Ea_profile_extended_loso_mae_pp"] = ext
+OUT["kinetic_Ea_selection_note"] = {
+    "profile_minimum_not_nested_pp": float(min(prof.values())),
+    "profile_minimum_Ea_eV": float(min(prof, key=prof.get)),
+    "nested_loso_mae_pp": OUT["leave_one_source_out"]["arrhenius_kinetic_mixed"]["mae_pp"]}
+print("extended", ext)
 OUT["kinetic_Ea_profile_loso_mae_pp"] = prof
 OUT["linear_loso_mae_pp"] = base
 print("Ea profile", prof, base)

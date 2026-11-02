@@ -32,6 +32,10 @@
     "draws_per_chain": 5000,
     "factors": "both",
     "eps": 0.02,
+    "variance_prior_inv_gamma": [
+      2.0,
+      1.0
+    ],
     "coef": {
       "intercept": {
         "mean": 0.34890540788122965,
@@ -236,6 +240,10 @@
       "draws_per_chain": 5000,
       "factors": "source",
       "eps": 0.02,
+      "variance_prior_inv_gamma": [
+        2.0,
+        1.0
+      ],
       "coef": {
         "intercept": {
           "mean": 0.2502676771661567,
@@ -400,6 +408,10 @@
       "draws_per_chain": 5000,
       "factors": "lab",
       "eps": 0.02,
+      "variance_prior_inv_gamma": [
+        2.0,
+        1.0
+      ],
       "coef": {
         "intercept": {
           "mean": 0.35597807189941794,

@@ -78,7 +78,7 @@ json.dump(OUT, open(DATA / "hierarchical_results.json", "w"), indent=2)
 mu, sd = draws["mu"], draws["sd"]
 beta = draws["beta"].mean(0)
 grid_i = np.linspace(25, 1000, 40)
-grid_a = np.linspace(1500, 1950, 40)
+grid_a = np.linspace(1250, 1950, 50)
 Z = np.zeros((len(grid_a), len(grid_i)))
 for ia, a in enumerate(grid_a):
     for ii, i in enumerate(grid_i):
@@ -91,7 +91,7 @@ ax.scatter(pts.implant_temp_C, pts.anneal_temp_C, c="w", edgecolor="k", s=25)
 plt.colorbar(cs, label="Predicted activation (%)")
 ax.set_xlabel("Implant temperature (°C)")
 ax.set_ylabel("Anneal temperature (°C)")
-ax.set_title("Posterior-mean activation, 30 min anneal, 1e20 cm$^{-3}$ Al\n(white points: conditions in the data)")
+ax.set_title("Posterior-mean activation, 30 min anneal, $10^{20}$ cm$^{-3}$ Al\n(white points: conditions in the data)")
 plt.tight_layout()
 plt.savefig(FIG / "design_map.png", dpi=150)
 plt.savefig(FIG / "design_map.pdf")

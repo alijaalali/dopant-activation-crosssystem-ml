@@ -175,6 +175,26 @@ OUT["hall_factor_sensitivity"] = {
     "grid_worst": min(grid, key=lambda g: g["implant_T"]),
     "mc_implant_T_percentiles_2.5_50_97.5": [float(v) for v in np.percentile(mc, [2.5, 50, 97.5])],
     "mc_share_positive": float(np.mean(mc > 0))}
+hall_src = [s for s in uniq if s != "Saks2004"]
+grid_h = []
+for f in itertools.product(sc, repeat=len(hall_src)):
+    fm = dict(zip(hall_src, f))
+    fac = np.array([fm.get(s, 1.0) for s in src])
+    b = ols(Xz, y / fac)
+    grid_h.append({"factors": {**{s: float(v) for s, v in fm.items()}, "Saks2004": 1.0}, "implant_T": float(b[2]), "anneal_T": float(b[1])})
+rng = np.random.default_rng(8)
+mc_h = []
+for _ in range(5000):
+    fm = dict(zip(hall_src, np.exp(rng.uniform(0, np.log(5.0), size=len(hall_src)))))
+    fac = np.array([fm.get(s, 1.0) for s in src])
+    mc_h.append(ols(Xz, y / fac)[2])
+mc_h = np.array(mc_h)
+imp_h = np.array([g["implant_T"] for g in grid_h])
+OUT["hall_factor_sensitivity"]["hall_based_sources_only"] = {
+    "design": "overstatement factor f_s applied only to sources whose activation is Hall-derived (Saks2004 is resistivity-referenced and is left at 1); grid f_s in {1,5}; Monte Carlo log-uniform on [1,5]",
+    "sources_varied": hall_src, "grid_n": len(grid_h), "grid_implant_T_min": float(imp_h.min()), "grid_implant_T_max": float(imp_h.max()),
+    "grid_n_positive": int((imp_h > 0).sum()), "mc_implant_T_percentiles_2.5_50_97.5": [float(v) for v in np.percentile(mc_h, [2.5, 50, 97.5])],
+    "mc_share_positive": float(np.mean(mc_h > 0))}
 print("hall sensitivity", {k: v for k, v in OUT["hall_factor_sensitivity"].items() if k != "design"})
 
 models = {

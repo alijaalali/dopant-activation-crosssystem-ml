@@ -16,6 +16,7 @@ molecular-dynamics calculations were performed.
 | `data/database.csv` | Enlarged database (initial compilation plus 70 verified rows from full-text papers) |
 | `data/expansion_verified.csv` | The added rows with location in the paper |
 | `data/reporting_audit.csv` | Reporting audit of the 13 full-text papers |
+| `data/search_audit/` | Record of the structured literature search of 3 November 2026 (queries, hits, screening of records outside the database) |
 | `explorer.html` | Static browser for the database |
 | `data/system_covariates.csv` | One value per host system, used for the temperature-scale sensitivity analysis |
 | `data/sources.md` | Sources per system and conventions used when compiling |
@@ -41,7 +42,9 @@ Run from the repository root, in this order. Each script reads from `data/` and 
 10. `10_sensitivity_analyses.py` - clipping bounds, variance priors, restricted subsets by definition of activation, measurement-error scenarios and the row counts at each selection step (`data/sensitivity_results.json`).
 11. `11_dataset_flowchart.py` - draws the dataset-selection flowchart (`figures/dataset_flowchart.png`).
 
-Suggested order: 01, 04, 05, 10, 06, 07, 02, 03, 11, 09, 08. Scripts 05, 06 and 10 use four Gibbs chains with seeds 1-4 and dispersed starting values; the bootstrap over held-out units uses seed 0.
+12. `12_revision_analyses.py` - effect definitions and baseline covariates of the hierarchical model, refits after removing each definition class, variance share by structure and prior, fold-level validation summary with covariate differences, and the paired comparison of the two fitting methods (`data/revision_v2_results.json`, `figures/method_pairs.pdf`).
+
+Suggested order: 01, 04, 05, 10, 06, 12, 07, 02, 03, 11, 09, 08. Scripts 05, 06 and 10 use four Gibbs chains with seeds 1-4 and dispersed starting values; the bootstrap over held-out units uses seed 0.
 
 `common.py` and `models.py` hold shared helpers (data loading, exact source-level bootstrap, REML and Gibbs mixed-model fits).
 

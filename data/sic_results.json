@@ -258,7 +258,25 @@
       12.963418961543375,
       33.000684455863606
     ],
-    "mc_share_positive": 0.9968
+    "mc_share_positive": 0.9968,
+    "hall_based_sources_only": {
+      "design": "overstatement factor f_s applied only to sources whose activation is Hall-derived (Saks2004 is resistivity-referenced and is left at 1); grid f_s in {1,5}; Monte Carlo log-uniform on [1,5]",
+      "sources_varied": [
+        "S1_S2",
+        "S3",
+        "Weisse2019_AIPAdv"
+      ],
+      "grid_n": 8,
+      "grid_implant_T_min": 29.464032775247635,
+      "grid_implant_T_max": 37.347558080977315,
+      "grid_n_positive": 8,
+      "mc_implant_T_percentiles_2.5_50_97.5": [
+        30.755362578494317,
+        34.835203856846356,
+        36.88865359245729
+      ],
+      "mc_share_positive": 1.0
+    }
   },
   "model_panel": {
     "summary": {

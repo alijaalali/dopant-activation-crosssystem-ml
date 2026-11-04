@@ -9,9 +9,10 @@ from common import DATA, FIG
 
 h = json.load(open(DATA / "hierarchical_results.json"))
 k = json.load(open(DATA / "kinetic_validation_results.json"))
-share = h["main"]["share"]["between_groups_total"]
-eff = h["main"]["marginal_effect_pp_per_sd"]["implant_temp_C"]
-eff_drop = h["sensitivity"]["drop_Saks2004"]["marginal_pp"]
+r2 = json.load(open(DATA / "revision_v2_results.json"))
+share = h["sensitivity"]["no_lab_effect"]["share_between_groups"]
+eff = h["sensitivity"]["no_lab_effect"]["marginal_pp"]
+eff_drop = r2["leave_one_definition_class_out"]["without_resistivity_adjusted"]["source"]["implant_T_pp"]
 schemes = [("leave_one_source_out", "Held-out\nsources (6)"), ("leave_one_lab_out", "Held-out\nlaboratories (5)"),
            ("temporal", "Later\npublications (2)")]
 models = [("training_mean", "Training mean", "#1b9e77"), ("linear_mixed", "Linear mixed", "#7570b3"),
@@ -29,7 +30,7 @@ ax.set_xlim(-0.7, 0.7)
 ax.set_ylim(0, 100)
 ax.set_xticks([])
 ax.set_ylabel("Model-based share of variance\nin logit activation (%)")
-ax.text(0, s / 2, f"Between sources\nand laboratories\n{s:.0f}%\n(95% credible\ninterval\n{100 * share['ci95'][0]:.0f}–{100 * share['ci95'][1]:.0f}%)", ha="center", va="center", color="w", fontweight="bold", fontsize=10)
+ax.text(0, s / 2, f"Between\nsources\n{s:.0f}%\n(95% credible\ninterval\n{100 * share['ci95'][0]:.0f}–{100 * share['ci95'][1]:.0f}%)", ha="center", va="center", color="w", fontweight="bold", fontsize=10)
 ax.text(0, s + (100 - s) / 2, f"Within\nsources\n{100 - s:.0f}%", ha="center", va="center")
 ax.set_title("Between-study variation\n(model estimate, logit scale)", fontsize=12)
 ax.spines[["top", "right"]].set_visible(False)

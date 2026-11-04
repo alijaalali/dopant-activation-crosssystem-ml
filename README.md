@@ -44,7 +44,9 @@ Run from the repository root, in this order. Each script reads from `data/` and 
 
 12. `12_revision_analyses.py` - effect definitions and baseline covariates of the hierarchical model, refits after removing each definition class, variance share by structure and prior, fold-level validation summary with covariate differences, and the paired comparison of the two fitting methods (`data/revision_v2_results.json`, `figures/method_pairs.pdf`).
 
-Suggested order: 01, 04, 05, 10, 06, 12, 07, 02, 03, 11, 09, 08. Scripts 05, 06 and 10 use four Gibbs chains with seeds 1-4 and dispersed starting values; the bootstrap over held-out units uses seed 0.
+13. `13_v3_analyses.py` - refits of the hierarchical model (source-only and source-and-laboratory) without the rows whose implanted concentration was derived with an assumed depth, on the rows with values stated by the source, and on combinations with the removal of the resistivity-referenced rows; sources per laboratory; row counts by dopant; temporal test sources (`data/revision_v3_results.json`).
+
+Suggested order: 01, 04, 05, 10, 06, 12, 13, 07, 02, 03, 11, 09, 08. Scripts 05, 06 and 10 use four Gibbs chains with seeds 1-4 and dispersed starting values; the bootstrap over held-out units uses seed 0.
 
 `common.py` and `models.py` hold shared helpers (data loading, exact source-level bootstrap, REML and Gibbs mixed-model fits).
 
@@ -52,7 +54,7 @@ Suggested order: 01, 04, 05, 10, 06, 12, 07, 02, 03, 11, 09, 08. Scripts 05, 06 
 
 Figures are drawn in a Times-type font. If Times New Roman, Times or Nimbus Roman is not installed, point `FIGURE_FONT_DIR` to a folder containing TeX Gyre Termes `.otf` files; otherwise matplotlib falls back to DejaVu Serif.
 
-Python 3.11.16 with the packages in `requirements.txt` (versions used: numpy 2.4.6, pandas 2.3.3, scipy 1.17.1, scikit-learn 1.9.1, matplotlib 3.11.1). The repository is tagged v1.1 for the analysis reported in the manuscript.
+Python 3.11.16 with the packages in `requirements.txt` (versions used: numpy 2.4.6, pandas 2.3.3, scipy 1.17.1, scikit-learn 1.9.1, matplotlib 3.11.1). The repository is tagged v1.4 for the analysis reported in the manuscript.
 
 ## Data notes
 

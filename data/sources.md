@@ -23,7 +23,7 @@ Each row of `activation_dataset.csv` is identified by `source_id` and a DOI or a
 | Saks2004 | 8 | Hall(resistivity-derived) | 10.1063/1.1764934 |
 | Bluet2000 | 2 | Hall(implied) | 10.1063/1.1305904 |
 | Weisse2019_AIPAdv | 2 | Hall+admittance(two-defect_model) | 10.1063/1.5096440 |
-| Watanabe2008_shuttle | 1 | Hall+CV | 10.1143/jjap.47.3027 |
+| Watanabe2008_shuttle | 1 | Hall+CV | 10.1143/jjap.47.2841 |
 | Nipoti2013_JMR | 1 | Hall | 10.1557/jmr.2012.207 |
 
 ## GaN

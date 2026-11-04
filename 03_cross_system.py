@@ -112,7 +112,7 @@ with open(DATA / "cross_system_results.json", "w") as f:
 
 order = ["Si", "GaAs", "InP", "Diamond", "GaN", "SiC"]
 colors = {"SiC": "#b03a2e", "GaN": "#2471a3", "Diamond": "#7d3c98", "GaAs": "#229954", "InP": "#d68910", "Si": "#566573"}
-fig, ax = plt.subplots(figsize=(9.0, 5.0))
+fig, ax = plt.subplots(figsize=(6.2, 3.5))
 for i, s in enumerate(order):
     r = next(x for x in rows if x["system"] == s)
     lo, hi = r["anneal_T_min_excluding_unverified"], r["anneal_T_max"]
@@ -121,18 +121,18 @@ for i, s in enumerate(order):
     ax.barh(i, hi - lo, left=lo, height=0.55, color=colors[s], alpha=0.85 if s == "SiC" else 0.55,
             edgecolor="black", linewidth=1.2 if s == "SiC" else 0.6)
     lab = f"{s}  (n={r['n_rows']} rows, {r['n_sources']} sources)"
-    ax.text(hi + 40, i, lab, va="center", fontsize=9.5, fontweight="bold" if s == "SiC" else "normal")
+    ax.text(hi + 40, i, lab, va="center", fontsize=8.5, fontweight="bold" if s == "SiC" else "normal")
 ax.set_yticks([])
 ax.set_xlabel("Numeric post-implantation anneal temperatures in the compiled literature (°C)")
-ax.set_xlim(0, 2500)
-ax.set_title("Anneal-temperature range across six compiled dopant-implantation systems\n(bar = reported range, not activation level)")
+ax.set_xlim(0, 3300)
+ax.set_title("Anneal-temperature range across six compiled dopant-implantation systems\n(bar = reported range, not activation level)", fontsize=9)
 ax.spines[["top", "right", "left"]].set_visible(False)
 plt.tight_layout()
 plt.savefig(FIG / "sixsystem_comparison.png", dpi=200)
 plt.savefig(FIG / "sixsystem_comparison.pdf")
 plt.close()
 
-fig, ax = plt.subplots(figsize=(8, 3.8))
+fig, ax = plt.subplots(figsize=(4.7, 3.0))
 labs = {"raw": "Raw", "ceiling": "Divided by\nsystem ceiling", "rank": "Within-system\nrank", "zscore": "Within-system\nz-score"}
 for i, k in enumerate(labs):
     c = OUT["pooled_correlation"][k]

@@ -84,14 +84,14 @@ for ia, a in enumerate(grid_a):
     for ii, i in enumerate(grid_i):
         x = (np.array([i, a, np.log10(30.0), np.log10(1e20)]) - mu) / sd
         Z[ia, ii] = 100 * inv_logit(beta[0] + x @ beta[1:])
-fig, ax = plt.subplots(figsize=(6, 4.6))
+fig, ax = plt.subplots(figsize=(5.2, 4.0))
 cs = ax.contourf(grid_i, grid_a, Z, levels=np.linspace(0, 100, 11), cmap="viridis")
 pts = al.drop_duplicates(["implant_temp_C", "anneal_temp_C"])
 ax.scatter(pts.implant_temp_C, pts.anneal_temp_C, c="w", edgecolor="k", s=25)
 plt.colorbar(cs, label="Predicted activation (%)")
 ax.set_xlabel("Implant temperature (°C)")
 ax.set_ylabel("Anneal temperature (°C)")
-ax.set_title("Posterior-mean activation, 30 min anneal, $10^{20}$ cm$^{-3}$ Al\n(white points: conditions in the data)")
+ax.set_title("Posterior-mean activation, 30 min anneal, $10^{20}$ cm$^{-3}$ Al\n(white points: conditions in the data)", fontsize=9)
 plt.tight_layout()
 plt.savefig(FIG / "design_map.png", dpi=150)
 plt.savefig(FIG / "design_map.pdf")

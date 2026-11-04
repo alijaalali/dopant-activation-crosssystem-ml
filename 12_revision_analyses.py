@@ -104,7 +104,7 @@ OUT["method_pairs"] = {"table": w.to_dict("records"), "n": int(len(w)), "mean_di
                        "spearman_diff_vs_p_activation": [float(x) for x in stats.spearmanr(w.diff_pp, w["p"])],
                        "distinct_concentrations": sorted(float(x) for x in w.implanted_conc_cm3.unique()),
                        "mean_diff_by_conc": {str(k): float(v) for k, v in w.groupby("implanted_conc_cm3").diff_pp.mean().items()}}
-fig, ax = plt.subplots(1, 2, figsize=(7.2, 3.4))
+fig, ax = plt.subplots(1, 2, figsize=(6.5, 3.2))
 for _, r in w.iterrows():
     ax[0].plot([0, 1], [r["p"], r["p-mu"]], "o-", color="0.35", lw=1)
 ax[0].set_xticks([0, 1])

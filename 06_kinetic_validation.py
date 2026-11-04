@@ -171,7 +171,7 @@ OUT["linear_loso_mae_pp"] = base
 print("Ea profile", prof, base)
 json.dump(OUT, open(DATA / "kinetic_validation_results.json", "w"), indent=2)
 
-fig, ax = plt.subplots(figsize=(5.5, 3.8))
+fig, ax = plt.subplots(figsize=(4.9, 3.4))
 ax.plot(list(prof), list(prof.values()), "o-", color="tab:blue", label="Arrhenius-equivalent time")
 ax.plot(list(ext), list(ext.values()), "o", mfc="white", color="tab:blue", label="Extended grid (12-50 eV)")
 ax.axhline(base["linear"], color="tab:red", linestyle="--", label="linear (anneal T, log time)")

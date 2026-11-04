@@ -259,11 +259,11 @@ with open(DATA / "sic_results.json", "w") as f:
     json.dump(OUT, f, indent=2)
 
 plt.rcParams.update({"font.size": 9})
-fig, ax = plt.subplots(figsize=(5.5, 4.5))
+fig, ax = plt.subplots(figsize=(4.7, 3.9))
 sc_ = ax.scatter(mv.anneal_T, mv.implant_T, c=mv.act, s=90, cmap="viridis", edgecolor="k",
                  linewidth=0.6, vmin=0, vmax=100)
 for _, r in mv.iterrows():
-    ax.annotate(f"{r.act:.0f}%", (r.anneal_T, r.implant_T), fontsize=6.5, xytext=(3, 3),
+    ax.annotate(f"{r.act:.0f}%", (r.anneal_T, r.implant_T), fontsize=8, xytext=(3, 3),
                 textcoords="offset points")
 ax.set_xlabel("Anneal temperature (°C)")
 ax.set_ylabel("Implant temperature (°C)")
@@ -274,19 +274,19 @@ plt.savefig(FIG / "sic_implantT_annealT_activation.png", dpi=150)
 plt.savefig(FIG / "sic_implantT_annealT_activation.pdf")
 plt.close()
 
-fig, axes = plt.subplots(1, 2, figsize=(8, 3.5))
+fig, axes = plt.subplots(1, 2, figsize=(5.5, 2.9))
 b = enum["betas"]
 for ax, j, col, ttl in [(axes[0], 1, "#1f77b4", "Anneal-T coefficient"), (axes[1], 2, "#d62728", "Implant-T coefficient")]:
     ax.hist(b[:, j], bins=30, color=col, alpha=0.8)
     ax.axvline(0, color="k", linestyle="--")
-    ax.set_title(f"{ttl}\n(exact source-level bootstrap, {len(b)} resamples)")
+    ax.set_title(f"{ttl}\n(exact source-level bootstrap, {len(b)} resamples)", fontsize=8.5)
     ax.set_xlabel("Standardized coefficient")
 plt.tight_layout()
 plt.savefig(FIG / "sic_cluster_bootstrap_coefficients.png", dpi=150)
 plt.savefig(FIG / "sic_cluster_bootstrap_coefficients.pdf")
 plt.close()
 
-fig, ax = plt.subplots(figsize=(6.5, 6))
+fig, ax = plt.subplots(figsize=(5.5, 5.6))
 names = list(panel)
 yp = np.arange(len(names))
 full_imp = [panel[k]["effect"]["implant_T"] for k in names]
@@ -297,10 +297,10 @@ ax.barh(yp + 0.2, ann, height=0.35, color="#1f77b4", alpha=0.6, label="Anneal-T 
 ax.scatter(no_saks, yp - 0.2, color="k", marker="D", s=14, zorder=3, label="Implant-T effect, Saks et al. removed")
 ax.axvline(0, color="k", linewidth=0.8)
 ax.set_yticks(yp)
-ax.set_yticklabels(names, fontsize=7.5)
+ax.set_yticklabels(names, fontsize=8)
 ax.set_xlabel("Change in activation% from -1 SD to +1 SD")
 ax.set_title(f"17 model specifications fitted to the same {n} rows")
-ax.legend(fontsize=7, loc="lower right")
+ax.legend(fontsize=8, loc="upper center", bbox_to_anchor=(0.45, -0.1))
 plt.tight_layout()
 plt.savefig(FIG / "robustness_panel.png", dpi=150)
 plt.savefig(FIG / "robustness_panel.pdf")

@@ -23,7 +23,7 @@ def plural(n, word):
     return f"{n} {word}" + ("" if n == 1 else "s")
 
 
-fig, ax = plt.subplots(figsize=(7.2, 8.6))
+fig, ax = plt.subplots(figsize=(6.5, 7.8))
 ax.set_xlim(0, 10)
 ax.set_ylim(0, 12)
 ax.axis("off")
@@ -65,10 +65,10 @@ arrow(MX, 3.5, MX, 2.8)
 box(MX, 2.35, MW, 0.9, f"Hierarchical model and validation\n{steps[-1][1]} rows, {plural(steps[-1][2], 'source')}, {n_labs} laboratory groups", fc="#dce9f5", bold=True)
 
 box(MX, 0.7, 7.0, 1.0, "Initial multivariate SiC model (Section 3.2)\n" + "\n".join(
-    f"{st[0]}: {st[1]} rows, {st[2]} sources" for st in init[-2:]), fc="#e5f2e0", fs=7.8)
+    f"{st[0]}: {st[1]} rows, {st[2]} sources" for st in init[-2:]), fc="#e5f2e0", fs=8)
 ax.plot([0.35, 0.35, 1.0], [11.2, 0.7, 0.7], color="#444444", lw=1.0, ls="--")
 ax.plot([0.35, 1.3], [11.2, 11.2], color="#444444", lw=1.0, ls="--")
-ax.text(0.5, 6.0, f"SiC rows of the initial compilation: {init[0][1]} rows, {init[0][2]} sources", rotation=90, ha="left", va="center", fontsize=7.8, style="italic")
+ax.text(0.5, 6.0, f"SiC rows of the initial compilation: {init[0][1]} rows, {init[0][2]} sources", rotation=90, ha="left", va="center", fontsize=8, style="italic")
 arrow(1.0, 0.7, 1.2, 0.7)
 plt.tight_layout()
 plt.savefig(FIG / "dataset_flowchart.png", dpi=200)

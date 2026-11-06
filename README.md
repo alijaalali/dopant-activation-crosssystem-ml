@@ -58,7 +58,7 @@ Code: MIT. Data and figures: CC BY 4.0 (see `LICENSE`).
 
 Figures are drawn in a Times-type font. If Times New Roman, Times or Nimbus Roman is not installed, point `FIGURE_FONT_DIR` to a folder containing TeX Gyre Termes `.otf` files; otherwise matplotlib falls back to DejaVu Serif.
 
-Python 3.11.16 with the packages in `requirements.txt` (versions used: numpy 2.4.6, pandas 2.3.3, scipy 1.17.1, scikit-learn 1.9.1, matplotlib 3.11.1). The repository is tagged v1.5 for the analysis reported in the manuscript.
+Python 3.11.16 with the packages in `requirements.txt` (versions used: numpy 2.4.6, pandas 2.3.3, scipy 1.17.1, scikit-learn 1.9.1, matplotlib 3.11.1). The repository is tagged v1.6 for the analysis reported in the manuscript.
 
 ## Data notes
 

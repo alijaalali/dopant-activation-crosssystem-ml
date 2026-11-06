@@ -42,13 +42,17 @@ Run from the repository root, in this order. Each script reads from `data/` and 
 10. `10_sensitivity_analyses.py` - clipping bounds, variance priors, restricted subsets by definition of activation, measurement-error scenarios and the row counts at each selection step (`data/sensitivity_results.json`).
 11. `11_dataset_flowchart.py` - draws the dataset-selection flowchart (`figures/dataset_flowchart.png`).
 
-12. `12_revision_analyses.py` - effect definitions and baseline covariates of the hierarchical model, refits after removing each definition class, variance share by structure and prior, fold-level validation summary with covariate differences, and the paired comparison of the two fitting methods (`data/revision_v2_results.json`, `figures/method_pairs.pdf`).
+12. `12_definition_class_analyses.py` - effect definitions and baseline covariates of the hierarchical model, refits after removing each definition class, variance share by structure and prior, fold-level validation summary with covariate differences, and the paired comparison of the two fitting methods (`data/definition_class_results.json`, `figures/method_pairs.pdf`).
 
-13. `13_v3_analyses.py` - refits of the hierarchical model (source-only and source-and-laboratory) without the rows whose implanted concentration was derived with an assumed depth, on the rows with values stated by the source, and on combinations with the removal of the resistivity-referenced rows; sources per laboratory; row counts by dopant; temporal test sources (`data/revision_v3_results.json`).
+13. `13_subset_analyses.py` - refits of the hierarchical model (source-only and source-and-laboratory) without the rows whose implanted concentration was derived with an assumed depth, on the rows with values stated by the source, and on combinations with the removal of the resistivity-referenced rows; sources per laboratory; row counts by dopant; temporal test sources (`data/subset_results.json`).
 
 Suggested order: 01, 04, 05, 10, 06, 12, 13, 07, 02, 03, 11, 09, 08. Scripts 05, 06 and 10 use four Gibbs chains with seeds 1-4 and dispersed starting values; the bootstrap over held-out units uses seed 0.
 
 `common.py` and `models.py` hold shared helpers (data loading, exact source-level bootstrap, REML and Gibbs mixed-model fits).
+
+## Licence
+
+Code: MIT. Data and figures: CC BY 4.0 (see `LICENSE`).
 
 ## Requirements
 

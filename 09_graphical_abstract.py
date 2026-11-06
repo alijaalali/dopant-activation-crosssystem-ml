@@ -9,7 +9,7 @@ from common import DATA, FIG
 
 h = json.load(open(DATA / "hierarchical_results.json"))
 k = json.load(open(DATA / "kinetic_validation_results.json"))
-r2 = json.load(open(DATA / "revision_v2_results.json"))
+r2 = json.load(open(DATA / "definition_class_results.json"))
 share = h["sensitivity"]["no_lab_effect"]["share_between_groups"]
 eff = h["sensitivity"]["no_lab_effect"]["marginal_pp"]
 eff_drop = r2["leave_one_definition_class_out"]["without_resistivity_adjusted"]["source"]["implant_T_pp"]

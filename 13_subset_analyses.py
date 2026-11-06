@@ -48,5 +48,5 @@ OUT["classification_check"] = {"sic_rows": int(len(sic)), "al_rows": int((sic.do
 kv = json.load(open(DATA / "kinetic_validation_results.json"))
 OUT["temporal_test_sources"] = kv["temporal"]["test_sources"]
 OUT["temporal_train_rows_sources"] = {k: v for k, v in kv["temporal"].items() if k in ("n_train", "n_test", "train_sources")}
-json.dump(OUT, open(DATA / "revision_v3_results.json", "w"), indent=2)
+json.dump(OUT, open(DATA / "subset_results.json", "w"), indent=2)
 print("DONE")

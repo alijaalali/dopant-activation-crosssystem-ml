@@ -10,7 +10,7 @@ df = pd.read_csv(DATA / "activation_dataset.csv", na_values=["NA"])
 LAB = {"S1_S2": "CNR-IMM-Catania", "Nipoti2011": "CNR-IMM-Bologna", "Nipoti2013_JMR": "CNR-IMM-Bologna", "Weng2010": "CNR-IMM-Catania",
        "Saks2004": "NRL-Cree",
        "S4_MSF": "Fraunhofer-IISB", "Weisse2019_AIPAdv": "Fraunhofer-IISB",
-       "S3": "Kyoto", "Watanabe2008_shuttle": "Kyoto", "Niwa2017_APEX": "Kyoto",
+       "S3": "Kyoto", "Watanabe2008_shuttle": "Mitsubishi-Electric", "Niwa2017_APEX": "Kyoto",
        "G1": "Nagoya", "G2_Hirukawa": "Nagoya", "Sumida2025_Ncoimp": "Nagoya", "Sumida2025_Ccap": "Nagoya",
        "Sakurai2020_ISPSD": "Nagoya", "G3": "NRL", "G4": "NRL", "Breckenridge2021": "NCSU"}
 YEAR = {"S1_S2": 2019, "S3": 2004, "S4_MSF": 2018, "G1": 2019, "G2_Hirukawa": 2021, "G3": 2014, "G4": 2012}

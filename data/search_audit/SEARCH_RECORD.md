@@ -6,7 +6,7 @@ This is a transparent record of the literature search used to check coverage of 
 
 - Search date: 2026-11-03 (all six queries run the same day)
 - Method: structured, relevance-ranked semantic literature search over Semantic Scholar / OpenAlex / PubMed records
-- Settings: page_size 100, page 0, no filters (no year, journal, study-type, open-access or domain filters)
+- Settings: first 100 results per query, no filters (no year, journal, study-type, open-access or domain filters)
 - Fields returned per hit: title, authors, year, citation count, journal, abstract (or abstract excerpt), DOI (where available)
 - Raw search outputs were saved; parsed into `search_hits.csv` (one row per query and hit)
 
@@ -29,19 +29,18 @@ Database: `code_release/data/database.csv`, 137 rows from 51 sources, each with 
 
 | Query | Database sources retrieved (of 51) |
 |---|---|
-| Q1 | 13 |
+| Q1 | 14 |
 | Q2 | 13 |
 | Q3 | 10 |
 | Q4 | 16 |
 | Q5 | 13 |
-| Q6 | 12 |
-| Any query | 37 (72.5%) |
+| Q6 | 13 |
+| Any query | 38 (74.5%) |
 
-By origin: initial compilation 28 of 40; expansion 9 of 11. Of the 40 sources in `existing_sources.txt`, 27 were retrieved.
+By origin: initial compilation 29 of 40; expansion 9 of 11. Of the 40 sources in `existing_sources.txt`, 28 were retrieved.
 
-Database sources not retrieved by any query (14), by source ID and DOI:
+Database sources not retrieved by any query (13), by source ID and DOI (the Watanabe 2008 record, DOI 10.1143/jjap.47.2841, is matched by Q1 and Q6):
 
-- Watanabe2008_shuttle (database DOI 10.1143/jjap.47.3027 did not resolve in Crossref on 2026-11-04; the hit titled "Shuttle Activation Annealing of Implanted Al in 4H-SiC", 2008, DOI 10.1143/jjap.47.2841, is the same work, and the database DOI has been corrected. The counts below were computed before this correction; with it, 38 of 51 database sources are matched)
 - McLevige1977_JAP, 10.1063/1.324218
 - Chambon1985_APL, 10.1063/1.95722
 - Maezawa1986_EDL, 10.1109/edl.1986.26276
@@ -59,17 +58,17 @@ Database sources not retrieved by any query (14), by source ID and DOI:
 ### What this recall does and does not show
 
 - The database was built from earlier semantic literature searches and web searches plus manually downloaded open-access PDFs. Recall against it is therefore partly circular: it measures overlap with a set that was itself assembled partly by similar searches, not coverage of the true literature.
-- Of the 14 unretrieved sources, 11 are GaAs (5), InP (3) or Si (3) papers from 1977 to 2004, systems the six queries (SiC, GaN and diamond focused) were not designed to target; the other 3 are SiC (Watanabe2008_shuttle, Itoh1998_APL, Flemish1995_JES). The check therefore says little about recall for GaAs, InP and Si.
+- Of the 13 unretrieved sources, 11 are GaAs (5), InP (3) or Si (3) papers from 1977 to 2004, systems the six queries (SiC, GaN and diamond focused) were not designed to target; the other 2 are SiC (Itoh1998_APL, Flemish1995_JES). The check therefore says little about recall for GaAs, InP and Si.
 - Matching is strict on DOI. Alternate DOIs for the same work (preprint vs. journal, proceedings vs. journal) would count as misses, so recall may be slightly understated.
-- The check does not show that papers outside the database and outside the search hits do not exist. A single semantic-search tool with the top 100 results per query is a limited sample.
+- The check does not show that papers outside the database and outside the search hits do not exist. A single semantic search with the top 100 results per query is a limited sample.
 
 ## Screening of search hits not in the database (title and abstract only)
 
-371 unique hits are not in the database. Screening used only the title and abstract text returned by the tool; no full texts were fetched or read. Classification was made by a keyword rule on title and abstract (implanted acceptor species, host material, electrical measure, annealing), followed by manual review of the topic-eligible and borderline hits. It was not double-screened, and some abstracts are truncated or missing, so labels are provisional. `topic_ok` = ion-implanted acceptor activation measured electrically in SiC, GaN, diamond, GaAs, InP or Si. Per-hit labels are in `screening.csv`.
+370 unique hits are not in the database. Screening used only the title and abstract text returned by the tool; no full texts were fetched or read. Classification was made by a keyword rule on title and abstract (implanted acceptor species, host material, electrical measure, annealing), followed by manual review of the topic-eligible and borderline hits. It was not double-screened, and some abstracts are truncated or missing, so labels are provisional. `topic_ok` = ion-implanted acceptor activation measured electrically in SiC, GaN, diamond, GaAs, InP or Si. Per-hit labels are in `screening.csv`.
 
 | topic_ok | Screening label | Count |
 |---|---|---|
-| yes | abstract suggests numeric activation vs process conditions (potentially eligible, not extracted) | 100 |
+| yes | abstract suggests numeric activation vs process conditions (potentially eligible, not extracted) | 99 |
 | yes | unclear | 45 |
 | yes | review or theory/simulation only | 12 |
 | no | not an implanted-acceptor activation study | 171 |
@@ -81,7 +80,7 @@ Notes:
 - "Potentially eligible" means only that the abstract mentions activation or electrical results together with annealing conditions. It does not mean the paper reports usable numbers (implant temperature, anneal conditions, activation or hole concentration). That requires full-text review.
 - Papers excluded for inaccessible full text and papers excluded for incomplete numerical reporting are NOT yet separated at this stage: no full texts were attempted for these hits. That distinction applies only to the database-extraction stage, using `reporting_audit.csv` and the full-text access record for sources actually read.
 
-## Potentially eligible, not yet extracted (100 papers)
+## Potentially eligible, not yet extracted (99 papers)
 
 | DOI | Year | Title |
 |---|---|---|
@@ -132,7 +131,6 @@ Notes:
 | 10.1016/j.sse.2007.06.021 | 2007 | Ultra-low resistivity Al+ implanted 4H–SiC obtained by microwave annealing and a protective graphite cap |
 | 10.4028/www.scientific.net/msf.600-603.603 | 2008 | Annealing Temperature Dependence of the Electrically Active Profiles and Surface Roughness in Multiple Al Implanted 4H-SiC |
 | 10.4028/www.scientific.net/msf.600-603.585 | 2008 | Crystalline Recovery after Activation Annealing of Al Implanted 4H-SiC |
-| 10.1143/jjap.47.2841 | 2008 | Shuttle Activation Annealing of Implanted Al in 4H-SiC |
 | 10.1109/edssc.2009.5394252 | 2009 | Annealing effects on structural, optical and electrical properties of Al implanted 4H-SiC |
 | 10.4028/www.scientific.net/ssp.156-158.493 | 2009 | Correlation Study of Morphology, Electrical Activation and Contact formation of Ion Implanted 4H-SiC |
 | 10.4028/www.scientific.net/msf.615-617.457 | 2009 | Electrical Characterization of Al Implanted 4H-SiC Layers by Four Point Probe and Scanning Capacitance Microscopy |
@@ -190,5 +188,5 @@ Notes:
 
 - `search_hits.csv`: one row per (query, hit), with rank, DOI, title, first author, authors field, year, journal, citation count and abstract
 - `search_hits_unique.csv`: one row per DOI, with the queries that returned it
-- `screening.csv`: label for each of the 371 unique hits not in the database
+- `screening.csv`: label for each of the 370 unique hits not in the database
 - Recall computed with python3 from `code_release/data/database.csv`

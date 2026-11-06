@@ -120,5 +120,5 @@ plt.tight_layout()
 plt.savefig(FIG / "method_pairs.png", dpi=150)
 plt.savefig(FIG / "method_pairs.pdf")
 
-json.dump(OUT, open(DATA / "revision_v2_results.json", "w"), indent=2)
+json.dump(OUT, open(DATA / "definition_class_results.json", "w"), indent=2)
 print("DONE")

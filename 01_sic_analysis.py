@@ -262,8 +262,13 @@ plt.rcParams.update({"font.size": 9})
 fig, ax = plt.subplots(figsize=(4.7, 3.9))
 sc_ = ax.scatter(mv.anneal_T, mv.implant_T, c=mv.act, s=90, cmap="viridis", edgecolor="k",
                  linewidth=0.6, vmin=0, vmax=100)
+seen_pts = {}
 for _, r in mv.iterrows():
-    ax.annotate(f"{r.act:.0f}%", (r.anneal_T, r.implant_T), fontsize=8, xytext=(3, 3),
+    key = (round(r.anneal_T), round(r.implant_T))
+    k = seen_pts.get(key, 0)
+    seen_pts[key] = k + 1
+    # labels of points at identical coordinates are stacked so that they do not overlap
+    ax.annotate(f"{r.act:.0f}%", (r.anneal_T, r.implant_T), fontsize=8, xytext=(5, 4 - 11 * k),
                 textcoords="offset points")
 ax.set_xlabel("Anneal temperature (°C)")
 ax.set_ylabel("Implant temperature (°C)")
